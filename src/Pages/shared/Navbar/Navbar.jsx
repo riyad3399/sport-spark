@@ -27,8 +27,9 @@ const Navbar = () => {
   );
 
   return (
-    <div>
-      <div className="navbar bg-base-100">
+    <>
+      
+      <div className="navbar fixed z-10 max-w-screen-xl bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -59,11 +60,11 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{menuItems}</ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end pr-8 sm:pr-8">
           {user ? (
             <>
               <div className="flex flex-row gap-2 items-center">
-              <img className="h-10 w-10 border-2 rounded-full hidden sm:hidden md:block" src="" alt="" />
+              <img className="h-[50px] w-[50px] border-2 rounded-full hidden sm:hidden md:block" src={user && user.photoURL} alt="" />
               <button className="btn-custom">Logout</button>
              </div>
             </>
@@ -72,7 +73,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
