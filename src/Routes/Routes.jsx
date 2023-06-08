@@ -3,6 +3,7 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import Footer from "../Pages/shared/Footer/Footer";
 import SignUp from "../Pages/SignUp/SignUp";
+import Login from "../Pages/Login/Login";
 
 
 const route = createBrowserRouter([
@@ -17,6 +18,10 @@ const route = createBrowserRouter([
             {
                 path: 'signup',
                 element: <SignUp></SignUp>
+            },
+            {
+                path: 'login',
+                element: <Login></Login>
             },
             {
                 path: 'footer',

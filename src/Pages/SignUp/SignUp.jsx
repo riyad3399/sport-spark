@@ -3,6 +3,7 @@ import regesterImg from "../../assets/register.jpg";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -19,18 +20,17 @@ const SignUp = () => {
     createUser(data.email, data.password)
       .then((result) => {
         const loggedUser = result.user;
-          console.log(loggedUser);
-          Swal.fire({
-            title: 'Sign up successful',
-            width: 600,
-            padding: '3em',
-            color: '#716add',
-            backdrop: `
+        console.log(loggedUser);
+        Swal.fire({
+          title: "Sign up successful",
+          width: 600,
+          padding: "3em",
+          color: "#716add",
+          backdrop: `
               rgba(0,0,123,0.4)
-            `
-          })
-          updateUserProfile(data.name, data.photo)
-          .then(() => {})
+            `,
+        });
+        updateUserProfile(data.name, data.photo).then(() => {});
       })
       .catch((error) => {
         console.log(error);
@@ -41,8 +41,8 @@ const SignUp = () => {
     <div>
       <Helmet>
         <title>Signup - Sport Spark</title>
-          </Helmet>
-          <h1 className="text-3xl text-center my-4 font-semibold">Sign up Now!</h1>
+      </Helmet>
+      <h1 className="text-4xl text-center my-5 font-semibold">Sign up Now!</h1>
       <div className="hero min-h-screen w-full">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left md:w-1/2 sm:w-full">
@@ -112,6 +112,9 @@ const SignUp = () => {
                   className="btn btn-primary"
                 />
               </div>
+              <p className="text-center mt-3">
+                you have an already Account? Go <Link to='/login' className="text-blue-500 font-semibold">Login</Link>
+              </p>
             </form>
           </div>
         </div>
