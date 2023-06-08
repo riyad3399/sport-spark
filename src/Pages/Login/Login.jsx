@@ -4,29 +4,53 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { FaGoogle, FaGithub, FaEye, FaEyeSlash } from "react-icons/fa";
+import { useState } from "react";
 
 const Login = () => {
-  const { signIn } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+  const { signIn, loginWithGoogle } = useAuth();
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
+    reset();
     console.log(data);
     signIn(data.email, data.password)
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
         Swal.fire({
-          title: 'Login successful!',
-          icon: 'success',
-          confirmButtonText: 'Cool'
-        })
+          title: "Login successful!",
+          icon: "success",
+          confirmButtonText: "Cool",
+        });
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleGoogleLogin = () => {
+    loginWithGoogle()
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        Swal.fire({
+          title: "Login successful!",
+          icon: "success",
+          confirmButtonText: "Cool",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleShowPass = () => {
+    setShowPassword(!showPassword);
   };
   return (
     <div>
@@ -52,16 +76,23 @@ const Login = () => {
                   {...register("email", { required: true })}
                 />
               </div>
-              <div className="form-control">
+              <div className="form-control relative">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="password"
                   className="input input-bordered"
                   {...register("password", { required: true })}
                 />
+                <p
+                  onClick={handleShowPass}
+                  className="absolute bottom-3 right-3"
+                >
+                  {" "}
+                  {showPassword ? <FaEye className="text-blue-500" size={20}/> : <FaEyeSlash size={20}/>}
+                </p>
               </div>
 
               <div className="form-control mt-6">
@@ -70,6 +101,20 @@ const Login = () => {
                   value="Login"
                   className="btn btn-primary"
                 />
+              </div>
+              <div className="divider">OR</div>
+              <div className="flex flex-row justify-center gap-4">
+                <button
+                  onClick={handleGoogleLogin}
+                  className="btn btn-outline btn-primary btn-circle"
+                >
+                  {" "}
+                  <FaGoogle size={22} />{" "}
+                </button>
+                <button className="btn btn-outline btn-circle">
+                  {" "}
+                  <FaGithub size={22} />{" "}
+                </button>
               </div>
               <p className="text-center mt-3">
                 sport spark new? Go{" "}

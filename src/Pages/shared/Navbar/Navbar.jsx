@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.jpg";
 import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
   const menuItems = (
     <>
       <li>
@@ -26,9 +27,24 @@ const Navbar = () => {
     </>
   );
 
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Logout successful',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <>
-      
       <div className="navbar fixed z-10 max-w-screen-xl bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
@@ -55,7 +71,10 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
-         <Link to='/'> <img src={logo} alt="" /></Link>
+          <Link to="/">
+            {" "}
+            <img src={logo} alt="" />
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{menuItems}</ul>
@@ -64,9 +83,13 @@ const Navbar = () => {
           {user ? (
             <>
               <div className="flex flex-row gap-2 items-center">
-              <img className="h-[50px] w-[50px] border-2 rounded-full hidden sm:hidden md:block" src={user && user.photoURL} alt="" />
-              <button className="btn-custom">Logout</button>
-             </div>
+                <img
+                  className="h-[50px] w-[50px] border-2 rounded-full hidden sm:hidden md:block"
+                  src={user && user.photoURL}
+                  alt=""
+                />
+                <button onClick={handleLogout} className="btn-custom">Logout</button>
+              </div>
             </>
           ) : (
             <button className="btn-custom">Login</button>
