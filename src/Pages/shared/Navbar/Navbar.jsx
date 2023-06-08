@@ -1,12 +1,29 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.jpg";
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
-    
+  const { user } = useAuth();
   const menuItems = (
-    <li>
-      <Link to="/">Home</Link>
-    </li>
+    <>
+      <li>
+        <Link to="/" className="text-lg font-semibold">
+          Home
+        </Link>
+      </li>
+      ,
+      <li>
+        <Link className="text-lg font-semibold">Instuctors</Link>
+      </li>
+      ,
+      <li>
+        <Link className="text-lg font-semibold">Classes</Link>
+      </li>
+      ,
+      <li>
+        <Link className="text-lg font-semibold">Dashboard</Link>
+      </li>
+    </>
   );
 
   return (
@@ -37,13 +54,22 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
-          <img src={logo} alt="" />
+         <Link to='/'> <img src={logo} alt="" /></Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{menuItems}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          {user ? (
+            <>
+              <div className="flex flex-row gap-2 items-center">
+              <img className="h-10 w-10 border-2 rounded-full hidden sm:hidden md:block" src="" alt="" />
+              <button className="btn-custom">Logout</button>
+             </div>
+            </>
+          ) : (
+            <button className="btn-custom">Login</button>
+          )}
         </div>
       </div>
     </div>
