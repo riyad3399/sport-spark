@@ -1,8 +1,11 @@
 import { Helmet } from "react-helmet-async";
-import { FaHome } from "react-icons/fa";
+import { FaBoxOpen, FaHome } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
+import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
+  const [data] = useCart();
+  console.log(data);
   return (
     <div>
       <Helmet>
@@ -23,7 +26,11 @@ const Dashboard = () => {
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 h-full bg-base-300 text-base-content">
             <li>
-              <NavLink to="/dashboard/myclasses">My Classes</NavLink>
+              <NavLink to="/dashboard/myclasses"> My Classes
+                <button>
+                  <div className="badge">+{ data?.length || 0}</div>
+                </button>
+              </NavLink>
             </li>
             <li>
               <NavLink to="/dashboard/myenrolled">My Enrolled</NavLink>

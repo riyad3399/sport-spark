@@ -1,27 +1,38 @@
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
+import useCart from "../../hooks/useCart";
 
 const ClassesCard = ({ data }) => {
   const { name, instructor, availableSeats, price, image, _id } = data;
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [, , refetch] = useCart()
 
   const handleSelectClass = (item) => {
     console.log(item);
     if (user && user.email) {
-      const selectClass = {selectClassId: _id, name, instructor, availableSeats, price, image, email: user.email}
+      const selectClass = {
+        selectClassId: _id,
+        name,
+        instructor,
+        availableSeats,
+        price,
+        image,
+        email: user.email,
+      };
       fetch("http://localhost:5000/select-class", {
-        method: 'POST', 
+        method: "POST",
         headers: {
-          'content-type': 'application/json'
+          "content-type": "application/json",
         },
-        body: JSON.stringify(selectClass)
+        body: JSON.stringify(selectClass),
       })
         .then((res) => res.json())
         .then((data) => {
           if (data.insertedId) {
+            refetch();
             Swal.fire({
               position: "top-end",
               icon: "success",
@@ -39,7 +50,7 @@ const ClassesCard = ({ data }) => {
         confirmButtonText: "Login Now",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate('/login', {state: {from: location}})
+          navigate("/login", { state: { from: location } });
         }
       });
     }
