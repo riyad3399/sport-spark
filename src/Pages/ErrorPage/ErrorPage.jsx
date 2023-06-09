@@ -1,4 +1,4 @@
-import { Link, useRouteError } from "react-router-dom";
+import { NavLink, useRouteError } from "react-router-dom";
 import errorPhoto from '../../assets/errorPhoto.jpg'
 import { FaArrowLeft } from "react-icons/fa";
 
@@ -15,12 +15,12 @@ const ErrorPage = () => {
             <p className="text-2xl font-semibold md:text-3xl mb-8  text-error">
               {error?.error.message}
             </p>
-            <Link className="flex md:ml-28" to="/">
+            <NavLink className="flex md:ml-28" to="/">
               <button className="btn btn-custom  ">
                 {" "}
               <FaArrowLeft className="mr-2"/>  Back to homepage
               </button>
-            </Link>
+            </NavLink>
           </div>
         </div>
       </section>

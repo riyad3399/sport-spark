@@ -3,7 +3,7 @@ import regesterImg from "../../assets/register.jpg";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
 const SignUp = () => {
@@ -155,9 +155,9 @@ const SignUp = () => {
               </div>
               <p className="text-center mt-3">
                 you have an already Account? Go{" "}
-                <Link to="/login" className="text-blue-500 font-semibold">
+                <NavLink to="/login" className="text-blue-500 font-semibold">
                   Login
-                </Link>
+                </NavLink>
               </p>
             </form>
           </div>

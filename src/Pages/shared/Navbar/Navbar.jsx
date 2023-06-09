@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../../../assets/logo.jpg";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
@@ -8,26 +8,26 @@ const Navbar = () => {
   const menuItems = (
     <>
       <li>
-        <Link to="/" className="text-lg font-semibold">
+        <NavLink to="/" className="text-[16px] font-semibold">
           Home
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link to="classes" className="text-lg font-semibold">
+        <NavLink to="classes" className="text-[16px] font-semibold">
           Classes
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link to="/instructor" className="text-lg font-semibold">
+        <NavLink to="/instructor" className="text-[16px] font-semibold">
           Instuctors
-        </Link>
+        </NavLink>
       </li>
 
       {user && (
         <li>
-          <Link to="/dashboard" className="text-lg font-semibold">
+          <NavLink to="/dashboard" className="text-[16px] font-semibold">
             Dashboard
-          </Link>
+          </NavLink>
         </li>
       )}
     </>
@@ -77,10 +77,10 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
-          <Link to="/">
+          <NavLink to="/">
             {" "}
             <img src={logo} alt="" />
-          </Link>
+          </NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{menuItems}</ul>
@@ -100,9 +100,9 @@ const Navbar = () => {
               </div>
             </>
           ) : (
-            <Link to="/login">
+            <NavLink to="/login">
               <button className="btn-custom">Login</button>
-            </Link>
+            </NavLink>
           )}
         </div>
       </div>

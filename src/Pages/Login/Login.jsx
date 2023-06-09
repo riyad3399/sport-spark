@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import loginImg from "../../assets/login.jpg";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { FaGoogle, FaGithub, FaEye, FaEyeSlash } from "react-icons/fa";
@@ -11,6 +11,11 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { signIn, loginWithGoogle } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/';
+
   const {
     register,
     reset,
@@ -30,6 +35,7 @@ const Login = () => {
           icon: "success",
           confirmButtonText: "Cool",
         });
+        navigate(from, {replace:true})
       })
       .catch((error) => {
         console.log(error);
@@ -47,6 +53,7 @@ const Login = () => {
           icon: "success",
           confirmButtonText: "Cool",
         });
+        navigate(from, {replace:true})
       })
       .catch((error) => {
         console.log(error);
@@ -126,9 +133,9 @@ const Login = () => {
               </div>
               <p className="text-center mt-3">
                 sport spark new? Go{" "}
-                <Link className="text-blue-500 font-semibold" to="/signup">
+                <NavLink className="text-blue-500 font-semibold" to="/signup">
                   Sign up
-                </Link>
+                </NavLink>
               </p>
             </form>
           </div>

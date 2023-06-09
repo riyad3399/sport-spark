@@ -1,9 +1,53 @@
+import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
+
 const ClassesCard = ({ data }) => {
-  console.log(data);
-  const { name, instructor, availableSeats, price, image } = data;
+  const { name, instructor, availableSeats, price, image, _id } = data;
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleSelectClass = (item) => {
+    console.log(item);
+    if (user && user.email) {
+      const selectClass = {selectClassId: _id, name, instructor, availableSeats, price, image, email: user.email}
+      fetch("http://localhost:5000/select-class", {
+        method: 'POST', 
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(selectClass)
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "selected your class",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        });
+    } else {
+      Swal.fire({
+        title: "Please Login to select this class",
+        icon: "warning",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Login Now",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/login', {state: {from: location}})
+        }
+      });
+    }
+  };
+
   return (
-    <div>
-      <div className="card w-96 bg-base-100 hover:shadow-2xl border-2 hover:border-none">
+    <div className="">
+      <div className="card w-96 bg-base-100 hover:shadow-2xl border-2 hover:border-none  hover:scale-105 duration-200">
         <figure className="px-8 pt-8">
           <img src={image} alt="sports" className="rounded-xl" />
         </figure>
@@ -20,7 +64,12 @@ const ClassesCard = ({ data }) => {
             Price: <span className="text-blue-500">{price}</span>
           </p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Select</button>
+            <button
+              onClick={() => handleSelectClass(data)}
+              className="btn btn-primary"
+            >
+              Select
+            </button>
           </div>
         </div>
       </div>

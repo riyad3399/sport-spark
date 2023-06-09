@@ -5,3 +5,9 @@
 .btn-custom {
     @apply btn bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-slate-50;
   }
+
+
+  .drawer-side a.active {
+    color: white;
+    font-size: medium;
+  }
