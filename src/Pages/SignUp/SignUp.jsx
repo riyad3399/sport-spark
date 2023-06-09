@@ -4,9 +4,11 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const {
     register,
@@ -15,26 +17,32 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    reset();
     console.log(data);
-    createUser(data.email, data.password)
-      .then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
-        Swal.fire({
-          title: "Sign up successful",
-          width: 600,
-          padding: "3em",
-          color: "#716add",
-          backdrop: `
-              rgba(0,0,123,0.4)
-            `,
+    if (data.password !== data.confirm) {
+      setErrorMessage("password is not matching");
+      return;
+    } else {
+      reset();
+      setErrorMessage("");
+      createUser(data.email, data.password)
+        .then((result) => {
+          const loggedUser = result.user;
+          console.log(loggedUser);
+          Swal.fire({
+            title: "Sign up successful",
+            width: 600,
+            padding: "3em",
+            color: "#716add",
+            backdrop: `
+            rgba(0,0,123,0.4)
+          `,
+          });
+          updateUserProfile(data.name, data.photo).then(() => {});
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        updateUserProfile(data.name, data.photo).then(() => {});
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    }
   };
 
   return (
@@ -60,6 +68,9 @@ const SignUp = () => {
                   className="input input-bordered"
                   {...register("name", { required: true })}
                 />
+                {errors.name && (
+                  <span className="text-red-600">Name is required</span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -71,6 +82,9 @@ const SignUp = () => {
                   className="input input-bordered"
                   {...register("email", { required: true })}
                 />
+                {errors.email && (
+                  <span className="text-red-600">Email is required</span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -80,8 +94,24 @@ const SignUp = () => {
                   type="password"
                   placeholder="password"
                   className="input input-bordered"
-                  {...register("password", { required: true })}
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 20,
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])/,
+                  })}
                 />
+                {errors.password?.type === "required" && (
+                  <p className="text-red-600">Password is required</p>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <p className="text-red-600">Password must be 6 characters</p>
+                )}
+                {errors.password?.type === "pattern" && (
+                  <p className="text-red-600">
+                    Password must have one Uppercase and one special character.
+                  </p>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -93,6 +123,14 @@ const SignUp = () => {
                   className="input input-bordered"
                   {...register("confirm", { required: true })}
                 />
+                {errors.confirm && (
+                  <span className="text-red-600">
+                    confirm password is required
+                  </span>
+                )}
+                {errorMessage && (
+                  <span className="text-red-600">{errorMessage}</span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -104,6 +142,9 @@ const SignUp = () => {
                   className="input input-bordered"
                   {...register("photo", { required: true })}
                 />
+                {errors.photoURL && (
+                  <span className="text-red-600">PhotoURL is required</span>
+                )}
               </div>
               <div className="form-control mt-6">
                 <input
@@ -113,7 +154,10 @@ const SignUp = () => {
                 />
               </div>
               <p className="text-center mt-3">
-                you have an already Account? Go <Link to='/login' className="text-blue-500 font-semibold">Login</Link>
+                you have an already Account? Go{" "}
+                <Link to="/login" className="text-blue-500 font-semibold">
+                  Login
+                </Link>
               </p>
             </form>
           </div>

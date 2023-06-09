@@ -9,7 +9,7 @@ import banner6 from "../../../assets/images/banner6.jpg";
 
 const Banner = () => {
   return (
-    <Carousel autoPlay={true}>
+    <Carousel autoPlay={true} autoFocus={true}>
       <div>
         <img src={banner1} />
       </div>

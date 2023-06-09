@@ -12,15 +12,13 @@ const Navbar = () => {
           Home
         </Link>
       </li>
-      ,
+      <li>
+        <Link to='classes' className="text-lg font-semibold">Classes</Link>
+      </li>
       <li>
         <Link className="text-lg font-semibold">Instuctors</Link>
       </li>
-      ,
-      <li>
-        <Link className="text-lg font-semibold">Classes</Link>
-      </li>
-      ,
+
       <li>
         <Link className="text-lg font-semibold">Dashboard</Link>
       </li>
@@ -31,12 +29,12 @@ const Navbar = () => {
     logOut()
       .then(() => {
         Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Logout successful',
+          position: "top-end",
+          icon: "success",
+          title: "Logout successful",
           showConfirmButton: false,
-          timer: 1500
-        })
+          timer: 1500,
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -88,11 +86,15 @@ const Navbar = () => {
                   src={user && user.photoURL}
                   alt=""
                 />
-                <button onClick={handleLogout} className="btn-custom">Logout</button>
+                <button onClick={handleLogout} className="btn-custom">
+                  Logout
+                </button>
               </div>
             </>
           ) : (
-            <button className="btn-custom">Login</button>
+            <Link to="/login">
+              <button className="btn-custom">Login</button>
+            </Link>
           )}
         </div>
       </div>

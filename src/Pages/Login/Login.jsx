@@ -9,6 +9,7 @@ import { useState } from "react";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const { signIn, loginWithGoogle } = useAuth();
   const {
     register,
@@ -17,10 +18,11 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    reset();
     console.log(data);
     signIn(data.email, data.password)
       .then((result) => {
+        setErrorMessage("");
+        reset();
         const loggedUser = result.user;
         console.log(loggedUser);
         Swal.fire({
@@ -31,6 +33,7 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error);
+        setErrorMessage(error.message);
       });
   };
 
@@ -65,6 +68,7 @@ const Login = () => {
           </div>
           <div className="card flex-shrink-0 md:w-1/2 sm:w-full max-w-sm shadow-2xl bg-base-100">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+              {errorMessage && <p className="text-red-500">{errorMessage}</p>}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -91,7 +95,11 @@ const Login = () => {
                   className="absolute bottom-3 right-3"
                 >
                   {" "}
-                  {showPassword ? <FaEye className="text-blue-500" size={20}/> : <FaEyeSlash size={20}/>}
+                  {showPassword ? (
+                    <FaEye className="text-blue-500" size={20} />
+                  ) : (
+                    <FaEyeSlash size={20} />
+                  )}
                 </p>
               </div>
 
