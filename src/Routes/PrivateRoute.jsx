@@ -3,16 +3,24 @@ import useAuth from "../hooks/useAuth";
 import { Navigate, useLocation } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
+
+  const loaderContainerStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh", 
+  };
+
   const { user, loading } = useAuth();
   const location = useLocation();
   if (loading) {
     return (
-      <div className="min-h-screen">
+      <div style={loaderContainerStyle}>
         <BallTriangle
-          height={100}
-          width={100}
+          height={180}
+          width={180}
           radius={5}
-          color="#4fa94d"
+          color="#0000FF"
           ariaLabel="ball-triangle-loading"
           wrapperClass={{}}
           wrapperStyle=""

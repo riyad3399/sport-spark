@@ -5,14 +5,17 @@ import SignUp from "../Pages/SignUp/SignUp";
 import Login from "../Pages/Login/Login";
 import Classes from "../Pages/Classes/Classes";
 import Instructor from "../Pages/Instructor/Instructor";
-import Dashboard from "../Pages/Dashboard/Dashboard";
+import Dashboard from "../Layout/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import MyClasses from "../Pages/Dashboard/MyClasses/MyClasses";
+import MyEnrolled from "../Pages/Dashboard/MyEnrolled/MyEnrolled";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 
 const route = createBrowserRouter([
   {
     path: "/",
-        element: <Main></Main>,
+    element: <Main></Main>,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
@@ -43,10 +46,21 @@ const route = createBrowserRouter([
       <PrivateRoute>
         <Dashboard></Dashboard>
       </PrivateRoute>
-      ),
-      children: [
-        
-    ]
+    ),
+    children: [
+      {
+        path: "myclasses",
+        element: <MyClasses></MyClasses>,
+      },
+      {
+        path: 'myenrolled',
+        element: <MyEnrolled></MyEnrolled>
+      },
+      {
+        path: 'payhistory',
+        element: <PaymentHistory></PaymentHistory>
+      }
+    ],
   },
 ]);
 
