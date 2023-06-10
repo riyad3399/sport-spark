@@ -6,7 +6,7 @@ const useCart = () => {
     const { user } = useAuth();
     const token = localStorage.getItem('access-token')
     const {data=[], isLoading, refetch} = useQuery({
-        queryKey: ['carts', user?.email],
+        queryKey: ['select-class', user?.email],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/select-class?email=${user?.email}`, {
                 headers: {

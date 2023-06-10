@@ -78,6 +78,7 @@ const CheckoutForm = ({ price, data }) => {
         quantity: data.length,
         classItemId: data.map((item) => item._id),
         status: "service pending",
+        classesPhotos: data.map(item => item.pictureURL),
         classNames: data.map((item) => item.name),
       };
       axiosSecure.post("/payments", payment).then((res) => {
