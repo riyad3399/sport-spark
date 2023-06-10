@@ -4,11 +4,23 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useCart from "../../hooks/useCart";
 
 const ClassesCard = ({ data }) => {
-  const { name, instructor, availableSeats, price, image, _id } = data;
+  const {
+    name,
+    pictureURL,
+    instructorName,
+    instructorEmail,
+    subCategory,
+    price,
+    enrolled,
+    availableQuantity,
+    feedback,
+    status,
+    _id,
+  } = data;
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const [, , refetch] = useCart()
+  const [, , refetch] = useCart();
 
   const handleSelectClass = (item) => {
     console.log(item);
@@ -16,10 +28,10 @@ const ClassesCard = ({ data }) => {
       const selectClass = {
         selectClassId: _id,
         name,
-        instructor,
-        availableSeats,
+        instructorName,
+        availableQuantity,
         price,
-        image,
+        pictureURL,
         email: user.email,
       };
       fetch("http://localhost:5000/select-class", {
@@ -58,21 +70,48 @@ const ClassesCard = ({ data }) => {
 
   return (
     <div className="">
-      <div className="card w-96 bg-base-100 hover:shadow-2xl border-2 hover:border-none  hover:scale-105 duration-200">
-        <figure className="px-8 pt-8">
-          <img src={image} alt="sports" className="rounded-xl" />
+      <div className="card card-side w-full bg-base-100 hover:shadow-2xl border-2 hover:border-none  hover:scale-105 duration-300">
+        <figure className="w-1/2">
+          <img className="h-full w-full" src={pictureURL} alt="Movie" />
         </figure>
-        <div className="card-body ">
-          <h2 className="card-title text-2xl font-bold">{name}</h2>
-          <p className="text-lg font-medium">
-            Instructor: <span className="text-blue-500">{instructor}</span>
+        <div className="card-body">
+          <h2 className="card-title text-2xl">
+            Name: <span className="text-blue-500"> {name}</span>
+          </h2>
+          <p className="text-lg font-semibold">
+            {" "}
+            Instructor Name:  <span className="text-blue-500">{instructorName}</span>{" "}
+           
           </p>
-          <p className="text-lg font-medium">
-            AvailableSeats:{" "}
-            <span className="text-blue-500">{availableSeats}</span>
+          <p className="text-lg font-semibold">
+            {" "}
+            Instructor Email: <span className="text-blue-500">{instructorEmail}</span>{" "}
+            
           </p>
-          <p className="text-lg font-medium">
-            Price: <span className="text-blue-500">{price}</span>
+          <p className="text-lg font-semibold">
+            {" "}
+            SubCategory: <span className="text-blue-500">{subCategory}</span>{" "}
+            
+          </p>
+          <p className="text-lg font-semibold">
+            {" "}
+            Price: <span className="text-blue-500">{price}</span>{" "}
+            
+          </p>
+          <p className="text-lg font-semibold">
+            {" "}
+            Enrolled: <span className="text-blue-500">{enrolled}</span>{" "}
+             
+          </p>
+          <p className="text-lg font-semibold">
+            {" "}
+            Available Seat: <span className="text-blue-500">{availableQuantity}</span>{" "}
+             
+          </p>
+          <p className="text-lg font-semibold">
+            {" "}
+            Status: <span className="text-blue-500">{status}</span>{" "}
+            
           </p>
           <div className="card-actions justify-end">
             <button

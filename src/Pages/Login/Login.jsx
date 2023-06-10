@@ -4,18 +4,18 @@ import { useForm } from "react-hook-form";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import {  FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import SocialLogin from "../shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { signIn} = useAuth();
+  const { signIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -36,7 +36,7 @@ const Login = () => {
           icon: "success",
           confirmButtonText: "ok",
         });
-        navigate(from, {replace:true})
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error);
@@ -44,7 +44,6 @@ const Login = () => {
       });
   };
 
- 
   const handleShowPass = () => {
     setShowPassword(!showPassword);
   };

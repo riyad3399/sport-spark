@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
-import { FaHome, FaUsers } from "react-icons/fa";
+import { FaHome, FaUsers, FaWallet, FaCheckCircle } from "react-icons/fa";
+import { LuSchool } from "react-icons/lu";
 import { AiFillFileAdd } from "react-icons/ai";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
@@ -7,9 +8,7 @@ import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
   const [data] = useCart();
-  // const isAdmin = true;
   const [isAdmin] = useAdmin();
-  console.log(data);
   return (
     <div>
       <Helmet>
@@ -33,25 +32,24 @@ const Dashboard = () => {
               <>
                 <li>
                   <NavLink to="/dashboard/adminhome">
-                    <FaHome size={22}/> Admin Home
+                    <FaHome size={22} /> Admin Home
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/dashboard/allusers">
-                    <FaUsers size={22}/> All users
+                    <FaUsers size={22} /> All users
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/dashboard/addclass">
-                    <AiFillFileAdd size={22}/> Add A Class
+                    <AiFillFileAdd size={22} /> Add A Class
                   </NavLink>
                 </li>
-              
               </>
             ) : (
               <>
                 <li>
-                  <NavLink>
+                  <NavLink to="/dashboard/userhome">
                     {" "}
                     <FaHome size={22} /> User Home
                   </NavLink>
@@ -59,19 +57,19 @@ const Dashboard = () => {
                 <li>
                   <NavLink to="/dashboard/myclasses">
                     {" "}
-                    My Classes
-                    <button>
-                      <div className="badge">+{data?.length || 0}</div>
-                    </button>
+                    <LuSchool size={22} /> My Selected Classes
+                    <div className="badge">+{data?.length || 0}</div>
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/dashboard/myenrolled">
-                    My Enrolled class
+                    <FaCheckCircle size={22} /> Enrolled Class
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/payhistory">Payment History</NavLink>
+                  <NavLink to="/dashboard/payhistory">
+                    <FaWallet size={22} /> Payment History
+                  </NavLink>
                 </li>
               </>
             )}

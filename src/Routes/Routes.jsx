@@ -13,6 +13,8 @@ import MyEnrolled from "../Pages/Dashboard/MyEnrolled/MyEnrolled";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AddClass from "../Pages/Dashboard/AddClass/AddClass";
+import Payment from "../Pages/Dashboard/Payment/Payment";
+import AdminRoute from "./AdminRoute";
 
 const route = createBrowserRouter([
   {
@@ -55,22 +57,30 @@ const route = createBrowserRouter([
         element: <MyClasses></MyClasses>,
       },
       {
-        path: 'myenrolled',
-        element: <MyEnrolled></MyEnrolled>
+        path: "myenrolled",
+        element: <MyEnrolled></MyEnrolled>,
       },
       {
-        path: 'payhistory',
-        element: <PaymentHistory></PaymentHistory>
+        path: "payhistory",
+        element: <PaymentHistory></PaymentHistory>,
+      },
+      {
+        path: "payment",
+        element: <Payment></Payment>,
       },
       // admin routes
       {
-        path: 'allusers',
-        element: <AllUsers></AllUsers>
-      }, 
+        path: "allusers",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
       {
-        path: 'addclass',
-        element: <AddClass></AddClass>
-      }
+        path: "addclass",
+        element: <AddClass></AddClass>,
+      },
     ],
   },
 ]);

@@ -34,19 +34,19 @@ const AuthProvider = ({ children }) => {
   };
 
   const signIn = (email, password) => {
-    setLoading(true)
-    return signInWithEmailAndPassword(auth, email, password)
-  }
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
   const loginWithGoogle = () => {
-    setLoading(true)
-    return signInWithPopup(auth, googleProvider)
-  }
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
 
   const logOut = () => {
-    setLoading(true)
-    return signOut(auth)
-  }
+    setLoading(true);
+    return signOut(auth);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -55,18 +55,16 @@ const AuthProvider = ({ children }) => {
 
       // get and set token
       if (currentUser) {
-        axios.post('http://localhost:5000/jwt', { email: currentUser.email })
-          .then(data => {
+        axios
+          .post("http://localhost:5000/jwt", { email: currentUser.email })
+          .then((data) => {
             console.log(data.data.token);
-            localStorage.setItem('access-token', data.data.token)
-        })
+            localStorage.setItem("access-token", data.data.token);
+            setLoading(false);
+          });
       } else {
-        localStorage.removeItem('access-token')
+        localStorage.removeItem("access-token");
       }
-
-
-
-      setLoading(false)
     });
     return () => {
       return unsubscribe();
