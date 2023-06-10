@@ -3,12 +3,14 @@ import regesterImg from "../../assets/register.jpg";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import SocialLogin from "../shared/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const {
     register,
@@ -22,12 +24,33 @@ const SignUp = () => {
       setErrorMessage("password is not matching");
       return;
     } else {
-      reset();
       setErrorMessage("");
       createUser(data.email, data.password)
         .then((result) => {
           const loggedUser = result.user;
           console.log(loggedUser);
+          const saveUser = { name: data.name, email: data.email };
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(saveUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                reset();
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User created successful",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
+            });
           Swal.fire({
             title: "Sign up successful",
             width: 600,
@@ -153,6 +176,8 @@ const SignUp = () => {
                   className="btn btn-primary"
                 />
               </div>
+              <div className="divider">OR</div>
+              <SocialLogin></SocialLogin>
               <p className="text-center mt-3">
                 you have an already Account? Go{" "}
                 <NavLink to="/login" className="text-blue-500 font-semibold">

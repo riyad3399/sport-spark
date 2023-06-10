@@ -11,6 +11,8 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import MyClasses from "../Pages/Dashboard/MyClasses/MyClasses";
 import MyEnrolled from "../Pages/Dashboard/MyEnrolled/MyEnrolled";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import AddClass from "../Pages/Dashboard/AddClass/AddClass";
 
 const route = createBrowserRouter([
   {
@@ -59,6 +61,15 @@ const route = createBrowserRouter([
       {
         path: 'payhistory',
         element: <PaymentHistory></PaymentHistory>
+      },
+      // admin routes
+      {
+        path: 'allusers',
+        element: <AllUsers></AllUsers>
+      }, 
+      {
+        path: 'addclass',
+        element: <AddClass></AddClass>
       }
     ],
   },

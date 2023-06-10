@@ -19,7 +19,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink to="/instructor" className="text-[16px] font-semibold">
-          Instuctors
+          Instructors
         </NavLink>
       </li>
 

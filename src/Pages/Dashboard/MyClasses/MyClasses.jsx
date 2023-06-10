@@ -1,3 +1,4 @@
+import { FaTrash } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
 
 const MyClasses = () => {
@@ -38,7 +39,9 @@ const MyClasses = () => {
                 </td>
                 <td className="font-medium text-center ">{item.price}</td>
                 <td>
-                  <button className="btn btn-ghost btn-sm">details</button>
+                  <button className="btn btn-ghost btn-md hover:bg-red-200 btn-circle">
+                    <FaTrash size={22} className="text-red-400" />
+                  </button>
                 </td>
               </tr>
             ))}

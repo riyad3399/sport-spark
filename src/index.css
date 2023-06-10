@@ -8,6 +8,12 @@
 
 
   .drawer-side a.active {
-    color: white;
+    color: orange;
     font-size: medium;
+   
+  }
+  .drawer-side a {
+  background-color: transparent;
+  color: black;
+   
   }

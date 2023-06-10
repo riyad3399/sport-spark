@@ -4,13 +4,14 @@ import { useForm } from "react-hook-form";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import { FaGoogle, FaGithub, FaEye, FaEyeSlash } from "react-icons/fa";
+import {  FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import SocialLogin from "../shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { signIn, loginWithGoogle } = useAuth();
+  const { signIn} = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -43,22 +44,7 @@ const Login = () => {
       });
   };
 
-  const handleGoogleLogin = () => {
-    loginWithGoogle()
-      .then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
-        Swal.fire({
-          title: "Login successful!",
-          icon: "success",
-          confirmButtonText: "Cool",
-        });
-        navigate(from, {replace:true})
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+ 
   const handleShowPass = () => {
     setShowPassword(!showPassword);
   };
@@ -118,19 +104,7 @@ const Login = () => {
                 />
               </div>
               <div className="divider">OR</div>
-              <div className="flex flex-row justify-center gap-4">
-                <button
-                  onClick={handleGoogleLogin}
-                  className="btn btn-outline btn-primary btn-circle"
-                >
-                  {" "}
-                  <FaGoogle size={22} />{" "}
-                </button>
-                <button className="btn btn-outline btn-circle">
-                  {" "}
-                  <FaGithub size={22} />{" "}
-                </button>
-              </div>
+              <SocialLogin></SocialLogin>
               <p className="text-center mt-3">
                 sport spark new? Go{" "}
                 <NavLink className="text-blue-500 font-semibold" to="/signup">
