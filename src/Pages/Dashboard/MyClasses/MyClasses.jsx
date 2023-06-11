@@ -1,11 +1,15 @@
 import { FaTrash } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const MyClasses = () => {
   const [data] = useCart();
   return (
     <div className="w-full px-5">
+      <Helmet>
+        <title>Selected Classes - Sport Spark</title>
+      </Helmet>
       <div className="my-3 flex flex-row justify-between items-center">
         <h3 className="text-2xl font-semibold">Total Classes: {data.length}</h3>
         <Link to='/dashboard/payment'>

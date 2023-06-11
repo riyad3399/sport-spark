@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/axiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const PaymentHistory = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -14,7 +15,12 @@ const PaymentHistory = () => {
 
   return (
     <div className="w-full px-5">
-          <h3 className="text-2xl font-semibold my-5">Total Payments: { paidClasses.length}</h3>
+      <Helmet>
+        <title>Payment History - Sport Spark</title>
+      </Helmet>
+      <h3 className="text-2xl font-semibold my-5">
+        Total Payments: {paidClasses.length}
+      </h3>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

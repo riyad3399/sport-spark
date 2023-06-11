@@ -6,15 +6,28 @@
     @apply btn bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-slate-50;
   }
 
+  
+  .nav.active{
+    background-color: aquamarine;
+    color: black;
+
+  }
+  .nav{
+    color: darkorange;
+  }
 
   .drawer-side a.active {
-    color: orange;
+    color: green;
     font-size: medium;
+    background-color: aquamarine;
    
   }
   .drawer-side a {
   background-color: transparent;
-  color: black;
   margin-bottom: 8px;
    
   }
+
+ 
+  
+

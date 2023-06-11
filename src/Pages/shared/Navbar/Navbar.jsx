@@ -1,31 +1,42 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/logo.jpg";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import ToggleThem from "../../../Components/ToggleThem/ToggleThem";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+
   const menuItems = (
     <>
       <li>
-        <NavLink to="/" className="text-[16px] font-semibold">
+        <NavLink to="/" className="text-[16px] font-semibold text-black nav">
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink to="classes" className="text-[16px] font-semibold">
+        <NavLink
+          to="classes"
+          className="text-[16px] font-semibold text-black nav"
+        >
           Classes
         </NavLink>
       </li>
       <li>
-        <NavLink to="/instructor" className="text-[16px] font-semibold">
+        <NavLink
+          to="/instructor"
+          className="text-[16px] font-semibold text-black nav"
+        >
           Instructors
         </NavLink>
       </li>
 
       {user && (
         <li>
-          <NavLink to="/dashboard" className="text-[16px] font-semibold">
+          <NavLink
+            to="/dashboard"
+            className="text-[16px] font-semibold text-black nav"
+          >
             Dashboard
           </NavLink>
         </li>
@@ -77,10 +88,14 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
-          <NavLink to="/">
+
+          <Link to="/">
             {" "}
             <img src={logo} alt="" />
-          </NavLink>
+          </Link>
+          <div className="ml-4">
+            <ToggleThem></ToggleThem>
+          </div>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{menuItems}</ul>
