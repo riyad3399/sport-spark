@@ -1,9 +1,12 @@
+import useAuth from "../../hooks/useAuth";
+
 const InstructorCard = ({ data }) => {
-  console.log(data);
+  // console.log(data);
+  const { user } = useAuth();
   const { name, image, email, phone } = data;
   return (
     <div className="w-full">
-      <div className="card card-side bg-base-100 hover:shadow-2xl border-2 hover:border-none w-full">
+      <div className="card card-side bg-base-100 hover:shadow-2xl border-2 hover:border-none w-full ">
         <div className="w-1/2">
           <img src={image} className="rounded-lg h-full" alt="Movie" />
         </div>
@@ -13,10 +16,10 @@ const InstructorCard = ({ data }) => {
             Email:
             <span className="text-blue-500">{email}</span>
           </p>
-          <p className=" font-medium">
+          {user?.phone && <p className=" font-medium">
             Phone:
             <span className="text-blue-500">{phone}</span>
-          </p>
+          </p>}
           <div className="card-actions justify-end">
             <button className="btn btn-primary">Watch</button>
           </div>

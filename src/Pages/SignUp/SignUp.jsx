@@ -29,7 +29,11 @@ const SignUp = () => {
         .then((result) => {
           const loggedUser = result.user;
           console.log(loggedUser);
-          const saveUser = { name: data.name, email: data.email };
+          const saveUser = {
+            name: data.name,
+            email: data.email,
+            image: data.photo || data.photoURL,
+          };
           fetch("http://localhost:5000/users", {
             method: "POST",
             headers: {

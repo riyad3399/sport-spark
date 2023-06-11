@@ -12,9 +12,9 @@ const ErrorPage = () => {
             <img src={errorPhoto} alt="" />
           </div>
           <div className="max-w-md text-center">
-            <p className="text-2xl font-semibold md:text-3xl mb-8  text-error">
+            {/* <p className="text-2xl font-semibold md:text-3xl mb-8  text-error">
               {error?.error.message}
-            </p>
+            </p> */}
             <NavLink className="flex md:ml-28" to="/">
               <button className="btn btn-custom  ">
                 {" "}

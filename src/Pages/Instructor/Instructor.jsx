@@ -1,23 +1,34 @@
 import { useEffect, useState } from "react";
 import InstructorCard from "../../Components/InstructorCard/InstructorCard";
+import { Helmet } from "react-helmet-async";
 
 const Instructor = () => {
   const [instructorData, setInstructorData] = useState([]);
+  console.log(instructorData);
+
   useEffect(() => {
-    fetch("instructor.json")
+    fetch("http://localhost:5000/usersdata/instructor")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setInstructorData(data);
       });
   }, []);
+
+  const datas = instructorData?.filter(
+    (instructor) => instructor.role === "instructor"
+  );
+
   return (
     <div className="pt-12">
-          <div className="grid md:grid-cols-2 gap-5">
-          {instructorData.map((data) => (
-        <InstructorCard key={data._id} data={data}></InstructorCard>
-      ))}
-     </div>
+      <Helmet>
+        <title>Instructor - Sport Spark</title>
+      </Helmet>
+      <div className="grid md:grid-cols-2 gap-5">
+        {datas?.map((data) => (
+          <InstructorCard key={data._id} data={data}></InstructorCard>
+        ))}
+
+      </div>
     </div>
   );
 };

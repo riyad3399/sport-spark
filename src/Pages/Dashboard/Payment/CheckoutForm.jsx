@@ -6,7 +6,8 @@ import "./checkoutForm.css";
 import useAxiosSecure from "../../../hooks/axiosSecure";
 import Swal from "sweetalert2";
 
-const CheckoutForm = ({ price, data }) => {
+const CheckoutForm = ({ item }) => {
+
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
@@ -17,13 +18,13 @@ const CheckoutForm = ({ price, data }) => {
   const [transactionId, setTransactionId] = useState();
 
   useEffect(() => {
-    if (price > 0) {
-      axiosSecure.post("/create-payment-intent", { price }).then((res) => {
+    if (item.price > 0) {
+      axiosSecure.post("/create-payment-intent", {price: item.price }).then((res) => {
         console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
       });
     }
-  }, [price, axiosSecure]);
+  }, [item, axiosSecure]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -73,15 +74,15 @@ const CheckoutForm = ({ price, data }) => {
       const payment = {
         email: user?.email,
         transactionId: paymentIntent.id,
-        price,
+        price: item.price,
         date: new Date(),
-        quantity: data.length,
-        classItemId: data.map((item) => item._id),
+        quantity: item.length,
+        classItemId: item._id,
         status: "service pending",
-        classesPhotos: data.map(item => item.pictureURL),
-        classNames: data.map((item) => item.name),
+        classesPhotos: item.pictureURL,
+        classNames: item.name
       };
-      axiosSecure.post("/payments", payment).then((res) => {
+      axiosSecure.post(`/payments/${item._id}`, payment).then((res) => {
         if (res.data.insertedId) {
           Swal.fire({
             position: "top-end",
@@ -120,13 +121,13 @@ const CheckoutForm = ({ price, data }) => {
             type="submit"
             disabled={!stripe || !clientSecret || processing}
           >
-            Pay
+            Payment
           </button>
         </form>
         {cardError && <p className="text-error font-semibold">{cardError}</p>}
         {transactionId && (
           <p className="text-success text-center text-xl">
-            Transaction complete with transactionId: {transactionId}
+            transactionId: {transactionId}
           </p>
         )}
       </>

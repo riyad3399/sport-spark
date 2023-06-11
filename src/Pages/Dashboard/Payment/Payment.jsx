@@ -3,12 +3,17 @@ import useCart from "../../../hooks/useCart";
 import { Helmet } from "react-helmet-async";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
+import { useParams } from "react-router-dom";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 const Payment = () => {
   const [data] = useCart();
-  const total = data.reduce((sum, item) => sum + item.price, 0);
-  const price = parseFloat(total.toFixed(2));
+  const id = useParams();
+  console.log(id);
+
+
+  const item = data.find(cls => parseFloat(cls._id) == parseFloat(id.id))
+
   return (
     <div className="w-full">
       <Helmet>
@@ -16,7 +21,7 @@ const Payment = () => {
       </Helmet>
       <h3 className="text-2xl text-center font-semibold">Payment Now!</h3>
       <Elements stripe={stripePromise}>
-        <CheckoutForm data={data} price={price}></CheckoutForm>
+        <CheckoutForm  item={item}></CheckoutForm>
       </Elements>
     </div>
   );

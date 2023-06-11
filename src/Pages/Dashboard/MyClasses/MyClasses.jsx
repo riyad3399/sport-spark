@@ -2,21 +2,20 @@ import { FaTrash } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import RoutesTitel from "../../../Components/RoutesTitle/RoutesTitle";
 
 const MyClasses = () => {
   const [data] = useCart();
   return (
-    <div className="w-full px-5">
+    <div className="w-full ">
       <Helmet>
         <title>Selected Classes - Sport Spark</title>
       </Helmet>
-      <div className="my-3 flex flex-row justify-between items-center">
-        <h3 className="text-2xl font-semibold">Total Classes: {data.length}</h3>
-        <Link to='/dashboard/payment'>
-        <button className="btn btn-sm btn-success">pay</button>
-        </Link>
+      <RoutesTitel subHeading={"Your Selected Classes"} heading={"selected classes"}></RoutesTitel>
+      <div className="my-3 px-5 flex flex-row justify-between items-center">
+        <h3 className="text-2xl font-semibold">My selected Classes: {data.length}</h3>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto px-5">
         <table className="table">
           {/* head */}
           <thead className="bg-base-300">
@@ -25,8 +24,8 @@ const MyClasses = () => {
               <th className="text-sm">Image</th>
               <th className="text-sm">Name</th>
               <th className="text-sm">Instructor</th>
-              <th className="text-sm">AvailableSeats</th>
               <th className="text-sm">Price</th>
+              <th className="text-sm">payment</th>
               <th className="text-sm">Action</th>
             </tr>
           </thead>
@@ -47,10 +46,12 @@ const MyClasses = () => {
                 <td className="font-medium text-center">
                   {item.instructorName}
                 </td>
-                <td className="font-medium text-center">
-                  {item.availableQuantity}
-                </td>
                 <td className="font-medium text-center ">{item.price}</td>
+                <td className="font-medium text-center ">
+                  <Link to={`/dashboard/payment/${item._id}`}>
+                    <button  className="btn btn-sm btn-success">payment</button>
+                  </Link>
+                </td>
                 <td>
                   <button className="btn btn-ghost btn-md hover:bg-red-200 btn-circle">
                     <FaTrash size={22} className="text-red-400" />

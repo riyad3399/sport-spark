@@ -2,18 +2,16 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import useCart from "../../hooks/useCart";
+import { useState } from "react";
 
 const ClassesCard = ({ data }) => {
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   const {
     name,
     pictureURL,
     instructorName,
-    instructorEmail,
-    subCategory,
     price,
-    enrolled,
     availableQuantity,
-    feedback,
     status,
     _id,
   } = data;
@@ -23,6 +21,7 @@ const ClassesCard = ({ data }) => {
   const [, , refetch] = useCart();
 
   const handleSelectClass = (item) => {
+    setButtonDisabled(true)
     console.log(item);
     if (user && user.email) {
       const selectClass = {
@@ -68,55 +67,38 @@ const ClassesCard = ({ data }) => {
     }
   };
 
+  
+
   return (
-    <div className="">
-      <div className="card card-side w-full bg-base-100 hover:shadow-2xl border-2 hover:border-none  hover:scale-105 duration-300">
-        <figure className="w-1/2">
-          <img className="h-full w-full" src={pictureURL} alt="Movie" />
+    <div>
+      
+      <div className="card w-full  hover:shadow-2xl border-2 hover:border-none">
+        <figure className="px-8 pt-8">
+          <img
+            src={pictureURL}
+            alt="classes"
+            className="rounded-xl hover:scale-105 duration-200 hover:rounded-lg"
+          />
         </figure>
-        <div className="card-body">
-          <h2 className="card-title text-2xl">
-            Name: <span className="text-blue-500"> {name}</span>
-          </h2>
-          <p className="text-lg font-semibold">
-            {" "}
-            Instructor Name:  <span className="text-blue-500">{instructorName}</span>{" "}
-           
+        <div className="card-body ">
+          <h2 className="card-title text-2xl">{name}</h2>
+          <p className="text-lg">
+            Instructor Name:{" "}
+            <span className="text-blue-500 ">{instructorName}</span>
           </p>
-          <p className="text-lg font-semibold">
-            {" "}
-            Instructor Email: <span className="text-blue-500">{instructorEmail}</span>{" "}
-            
+          <p className="text-lg">
+            Avaiable Seats:{" "}
+            <span className="text-blue-500">{availableQuantity}</span>
           </p>
-          <p className="text-lg font-semibold">
-            {" "}
-            SubCategory: <span className="text-blue-500">{subCategory}</span>{" "}
-            
+          <p className="text-lg">
+            Price: <span className="text-blue-500">{price}</span>
           </p>
-          <p className="text-lg font-semibold">
-            {" "}
-            Price: <span className="text-blue-500">{price}</span>{" "}
-            
-          </p>
-          <p className="text-lg font-semibold">
-            {" "}
-            Enrolled: <span className="text-blue-500">{enrolled}</span>{" "}
-             
-          </p>
-          <p className="text-lg font-semibold">
-            {" "}
-            Available Seat: <span className="text-blue-500">{availableQuantity}</span>{" "}
-             
-          </p>
-          <p className="text-lg font-semibold">
-            {" "}
-            Status: <span className="text-blue-500">{status}</span>{" "}
-            
-          </p>
+
           <div className="card-actions justify-end">
             <button
               onClick={() => handleSelectClass(data)}
-              className="btn btn-primary"
+              disabled={buttonDisabled}
+              className="btn btn-outline bg-slate-200 w-2/6 border-b-4 border-t-0 border-x-0"
             >
               Select
             </button>
