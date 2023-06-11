@@ -1,12 +1,12 @@
 import { Helmet } from "react-helmet-async";
-import { FaTrash } from "react-icons/fa";
+import { FaChalkboardTeacher, FaTrash } from "react-icons/fa";
 import { RiAdminLine } from "react-icons/ri";
 import { useQuery } from "react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/axiosSecure";
 
 const AllUsers = () => {
-  const [axiosSecure] = useAxiosSecure()
+  const [axiosSecure] = useAxiosSecure();
 
   const { data: users = [], refetch } = useQuery(["users"], async () => {
     const res = await axiosSecure.get("/users");
@@ -59,6 +59,26 @@ const AllUsers = () => {
       });
   };
 
+  const handleMakeInstructor = (user) => {
+    fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${user.name} is an Instructor Now`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
+
   return (
     <div className="w-full px-5">
       <Helmet>
@@ -73,6 +93,7 @@ const AllUsers = () => {
               <th className="text-lg">#</th>
               <th className="text-lg">Name</th>
               <th className="text-lg">Email</th>
+              <th className="text-lg">Role</th>
               <th className="text-lg">Role</th>
               <th className="text-lg">Action</th>
             </tr>
@@ -99,6 +120,26 @@ const AllUsers = () => {
                     </button>
                   )}
                 </td>
+                {user.role !== "admin" ? (
+                  <td>
+                    {user.role === "instructor" ? (
+                      "instructor"
+                    ) : (
+                      <button
+                        onClick={() => handleMakeInstructor(user)}
+                        className="btn btn-ghost btn-circle btn-md"
+                      >
+                        {" "}
+                        <FaChalkboardTeacher
+                          size={22}
+                          className="text-blue-500 cursor-pointer"
+                        />
+                      </button>
+                    )}
+                  </td>
+                ) : (
+                  <td></td>
+                )}
                 <td>
                   <button
                     onClick={() => handleDelete(user)}

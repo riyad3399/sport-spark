@@ -1,86 +1,156 @@
-import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/axiosSecure";
 
 const AddClass = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const { user } = useAuth();
+  const [axiosSecure] = useAxiosSecure();
 
+  const handleClassAdded = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const pictureURL = form.pictureURL.value;
+    const instructorName = form.instructorName.value;
+    const instructorEmail = form.instructorEmail.value;
+    const subCategory = form.subCategory.value;
+    const price = parseFloat(form.price.value);
+    const availableQuantity = parseInt(form.availableQuantity.value);
+    const enrolled = 0;
+    const status = "pending";
+    const feedback = "";
+    const classDetails = {
+      name,
+      pictureURL,
+      instructorName,
+      instructorEmail,
+      subCategory,
+      price,
+      availableQuantity,
+      enrolled,
+      status,
+      feedback,
+    };
+
+    axiosSecure.post("/classes", classDetails).then((data) => {
+      console.log(data.data);
+      if (data.data.insertedId) {
+        form.reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Class added successful!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
   return (
-    <div className="w-full px-6">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-control ">
-          <label className="label">
-            <span className="label-text font-semibold">Class name*</span>
-          </label>
-          <input
-            {...register("name", { required: true })}
-            type="text"
-            placeholder="class name"
-            className="input input-bordered "
-          />
-        </div>
-        <div className="flex gap-4">
-          <div className="form-control w-full">
-            <label className="label">
-              <span className="label-text">Category*</span>
-            </label>
-            <select
-              {...register("category", { required: true })}
-              defaultValue="Pick One"
-              className="select select-bordered "
-            >
-              <option disabled>Pick One</option>
-              <option>Pizza</option>
-              <option>Soup</option>
-              <option>Salad</option>
-              <option>Drink</option>
-              <option>Deshi</option>
-              <option>Dessert</option>
-            </select>
+    <div className="w-full px-8 min-h-screen ">
+      <h3 className="text-4xl font-semibold text-center my-10">Add a Class</h3>
+      <div className="border-2 p-10 rounded-lg hover:shadow-2xl hover:border-none">
+        <form onClick={handleClassAdded}>
+          <div className="grid md:grid-cols-2 gap-5">
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                value={user?.displayName || user?.name}
+                name="name"
+                placeholder="Type here"
+                className="input input-bordered w-full "
+              />
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">pictureURL</span>
+              </label>
+              <input
+                type="url"
+                name="pictureURL"
+                required
+                placeholder="Type here"
+                className="input input-bordered w-full "
+              />
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Instructor Name</span>
+              </label>
+              <input
+                type="text"
+                name="instructorName"
+                required
+                placeholder="Type here"
+                className="input input-bordered w-full "
+              />
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Instructor Email</span>
+              </label>
+              <input
+                type="email"
+                value={user?.email}
+                name="instructorEmail"
+                placeholder="Type here"
+                className="input input-bordered w-full "
+              />
+            </div>
           </div>
-          <div className="form-control w-full">
-            <label className="label">
-              <span className="label-text font-semibold">Price*</span>
-            </label>
-            <input
-              {...register("price", { required: true })}
-              type="number"
-              placeholder="Type here"
-              className="input input-bordered "
-            />
+          <div className="grid md:grid-cols-3 gap-5 mt-3 items-center">
+            <div className="form-control w-full">
+              <label className="label">Select Your Category</label>
+              <select
+                className="select select-bordered"
+                required
+                name="subCategory"
+              >
+                <option value="football">Football</option>
+                <option value="basketball">Basketball</option>
+                <option value="tennis">Tennis</option>
+                <option value="volleyball">Volleyball</option>
+                <option value="golf">Golf</option>
+                <option value="cricket">Cricket</option>
+                <option value="rugby">Rugby</option>
+              </select>
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Price</span>
+              </label>
+              <input
+                type="number"
+                required
+                name="price"
+                placeholder="Type here"
+                className="input input-bordered w-full "
+              />
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text">Available Seat</span>
+              </label>
+              <input
+                type="number"
+                required
+                name="availableQuantity"
+                placeholder="Type here"
+                className="input input-bordered w-full "
+              />
+            </div>
           </div>
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Recipe Details</span>
-          </label>
-          <textarea
-            {...register("recipe", { required: true })}
-            className="textarea textarea-bordered h-24"
-            placeholder="Bio"
-          ></textarea>
-        </div>
-        <div className="form-control max-w-xs">
-          <label className="label">
-            <span className="label-text">Item Image*</span>
-          </label>
+
           <input
-            {...register("image", { required: true })}
-            type="file"
-            className="file-input file-input-bordered "
+            type="submit"
+            value="Add a Class"
+            className="btn btn-success w-full mt-10"
           />
-        </div>
-        <input
-          type="submit"
-          value="Add Item"
-          className="btn btn-warning btn-sm mt-4"
-        />
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

@@ -13,7 +13,7 @@ const Classes = () => {
 
   return (
     <div className="pt-12 pb-5">
-      <h3 className="text-center font-bold text-4xl my-5">All Classes </h3>
+      <h3 className="text-center font-bold text-4xl my-5">Total Classes: { classData.length}</h3>
       <div className="grid md:grid-cols-1 gap-8">
       {classData.map((data) => (
         <ClassesCard key={data._id} data={data}></ClassesCard>
