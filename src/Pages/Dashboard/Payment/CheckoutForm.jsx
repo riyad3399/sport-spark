@@ -31,7 +31,7 @@ const CheckoutForm = ({ item }) => {
 
   useEffect(() => {
     if (transactionId) {
-      fetch(`http://localhost:5000/create-payment-intent/`, {
+      fetch(`https://sport-spark-server-riyad3399.vercel.app/create-payment-intent/`, {
         method: "PATCH",
       })
         .then((res) => res.json())
@@ -145,7 +145,7 @@ const CheckoutForm = ({ item }) => {
         {cardError && <p className="text-error font-semibold">{cardError}</p>}
         {transactionId && (
           <p className="text-success text-center text-xl">
-            transactionId: {transactionId}
+           Payment successful transactionId: {transactionId}
           </p>
         )}
       </>

@@ -33,7 +33,7 @@ const ClassesCard = ({ data }) => {
         pictureURL,
         email: user.email,
       };
-      fetch("http://localhost:5000/select-class", {
+      fetch("https://sport-spark-server-riyad3399.vercel.app/select-class", {
         method: "POST",
         headers: {
           "content-type": "application/json",

@@ -6,7 +6,7 @@ const PopularInstructor = () => {
   const [popularInstructor, setPopularInstructor] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/usersdata/instructor")
+    fetch("https://sport-spark-server-riyad3399.vercel.app/usersdata/instructor")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
