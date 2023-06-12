@@ -1,7 +1,8 @@
 import { Helmet } from "react-helmet-async";
-import { FaHome, FaUsers, FaWallet, FaCheckCircle, FaSchool, FaBuilding } from "react-icons/fa";
+import { FaHome, FaUsers, FaWallet, FaCheckCircle, FaSchool, FaBuilding,  } from "react-icons/fa";
 import { LuSchool } from "react-icons/lu";
 import { AiFillFileAdd } from "react-icons/ai";
+import { CiViewList } from "react-icons/ci";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import useAdmin from "../hooks/useAdmin";
@@ -43,6 +44,11 @@ const Dashboard = () => {
       <li>
         <NavLink to="/dashboard/addclass">
           <AiFillFileAdd size={22} /> Add A Class
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/dashboard/viewmyclasses">
+          <CiViewList  size={22} />View My Classes
         </NavLink>
       </li>
     </>
