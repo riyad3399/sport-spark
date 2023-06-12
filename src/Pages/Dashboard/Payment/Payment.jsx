@@ -9,7 +9,6 @@ const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 const Payment = () => {
   const [data] = useCart();
   const id = useParams();
-  console.log(id);
 
 
   const item = data.find(cls => parseFloat(cls._id) == parseFloat(id.id))

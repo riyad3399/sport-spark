@@ -7,7 +7,6 @@ import useAxiosSecure from "../../../hooks/axiosSecure";
 import Swal from "sweetalert2";
 
 const CheckoutForm = ({ item }) => {
-
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
@@ -17,14 +16,33 @@ const CheckoutForm = ({ item }) => {
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState();
 
+  // TODO: top classes enrolled updated
   useEffect(() => {
-    if (item.price > 0) {
-      axiosSecure.post("/create-payment-intent", {price: item.price }).then((res) => {
-        console.log(res.data.clientSecret);
-        setClientSecret(res.data.clientSecret);
-      });
+    if (item?.price > 0) {
+      axiosSecure
+        .post("/create-payment-intent", { price: item.price })
+        .then((res) => {
+          console.log(res.data.clientSecret);
+          setClientSecret(res.data.clientSecret);
+        });
     }
+  
   }, [item, axiosSecure]);
+
+  useEffect(() => {
+    if (transactionId) {
+      fetch(`http://localhost:5000/create-payment-intent/`, {
+        method: "PATCH",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("from enrolled", data);
+          if (data.modifiedCount) {
+            console.log('hello world');
+          }
+        });
+    }
+  }, [transactionId, user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -80,7 +98,7 @@ const CheckoutForm = ({ item }) => {
         classItemId: item._id,
         status: "service pending",
         classesPhotos: item.pictureURL,
-        classNames: item.name
+        classNames: item.name,
       };
       axiosSecure.post(`/payments/${item._id}`, payment).then((res) => {
         if (res.data.insertedId) {

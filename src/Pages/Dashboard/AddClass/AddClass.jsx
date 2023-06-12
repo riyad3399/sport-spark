@@ -49,12 +49,14 @@ const AddClass = () => {
     });
   };
   return (
-    <div className="w-full px-8 min-h-screen ">
+    <div className="w-full px-8 min-h-screen">
       <Helmet>
         <title>Add class - Sport Spark</title>
       </Helmet>
-      <RoutesTitel subHeading={'new class added'} heading={'Add class'}></RoutesTitel>
-      <h3 className="text-4xl font-semibold text-center my-10">Add a Class</h3>
+      <RoutesTitel
+        subHeading={"new class added"}
+        heading={"Add class"}
+      ></RoutesTitel>
       <div className="border-2 p-10 rounded-lg hover:shadow-2xl hover:border-none">
         <form onClick={handleClassAdded}>
           <div className="grid md:grid-cols-2 gap-5">
