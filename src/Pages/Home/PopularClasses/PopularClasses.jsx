@@ -16,6 +16,7 @@ const PopularClasses = () => {
 
   return (
     <div>
+  
       <RoutesTitel
         subHeading={"Top 6 Popular classes"}
         heading={"top classes"}
