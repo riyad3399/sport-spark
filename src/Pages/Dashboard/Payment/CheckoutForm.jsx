@@ -22,23 +22,27 @@ const CheckoutForm = ({ item }) => {
       axiosSecure
         .post("/create-payment-intent", { price: item.price })
         .then((res) => {
-          console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         });
     }
-  
   }, [item, axiosSecure]);
 
   useEffect(() => {
     if (transactionId) {
-      fetch(`https://sport-spark-server-riyad3399.vercel.app/create-payment-intent/`, {
+      fetch(`http://localhost:5000/payments/${item.selectClassId}`, {
         method: "PATCH",
       })
         .then((res) => res.json())
         .then((data) => {
           console.log("from enrolled", data);
           if (data.modifiedCount) {
-            console.log('hello world');
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: "payment successful",
+              showConfirmButton: false,
+              timer: 1500
+            })
           }
         });
     }
@@ -145,7 +149,7 @@ const CheckoutForm = ({ item }) => {
         {cardError && <p className="text-error font-semibold">{cardError}</p>}
         {transactionId && (
           <p className="text-success text-center text-xl">
-           Payment successful transactionId: {transactionId}
+            Payment successful transactionId: {transactionId}
           </p>
         )}
       </>

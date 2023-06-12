@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { FaHome, FaUsers, FaWallet, FaCheckCircle, FaSchool } from "react-icons/fa";
+import { FaHome, FaUsers, FaWallet, FaCheckCircle, FaSchool, FaBuilding } from "react-icons/fa";
 import { LuSchool } from "react-icons/lu";
 import { AiFillFileAdd } from "react-icons/ai";
 import { NavLink, Outlet } from "react-router-dom";
@@ -22,6 +22,11 @@ const Dashboard = () => {
       <li>
         <NavLink to="/dashboard/allusers">
           <FaUsers size={22} /> All users
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/dashboard/manageclass">
+          <FaBuilding size={22} /> Manage Classes
         </NavLink>
       </li>
     </>

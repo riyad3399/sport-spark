@@ -34,7 +34,7 @@ const SignUp = () => {
             email: data.email,
             image: data.photo || data.photoURL,
           };
-          fetch("https://sport-spark-server-riyad3399.vercel.app/users", {
+          fetch("http://localhost:5000/users", {
             method: "POST",
             headers: {
               "content-type": "application/json",

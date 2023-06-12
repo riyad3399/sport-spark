@@ -5,7 +5,7 @@ import RoutesTitel from "../../../Components/RoutesTitle/RoutesTitle";
 const MyEnrolled = () => {
   const [enrollClasses, setEnrollClasses] = useState([]);
   useEffect(() => {
-    fetch("https://sport-spark-server-riyad3399.vercel.app/payments")
+    fetch("http://localhost:5000/payments")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

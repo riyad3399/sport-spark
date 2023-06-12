@@ -6,10 +6,11 @@ import RoutesTitel from "../../Components/RoutesTitle/RoutesTitle";
 const Classes = () => {
   const [classData, setClassData] = useState([]);
   useEffect(() => {
-    fetch("https://sport-spark-server-riyad3399.vercel.app/classes")
+    fetch("http://localhost:5000/classes")
       .then((res) => res.json())
       .then((data) => {
         setClassData(data);
+        console.log('all class',data);
       });
   }, []);
 

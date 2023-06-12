@@ -1,12 +1,10 @@
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
-import useAxiosSecure from "../../../hooks/axiosSecure";
 import { Helmet } from "react-helmet-async";
 import RoutesTitel from "../../../Components/RoutesTitle/RoutesTitle";
 
 const AddClass = () => {
   const { user } = useAuth();
-  const [axiosSecure] = useAxiosSecure();
 
   const handleClassAdded = (event) => {
     event.preventDefault();
@@ -21,6 +19,7 @@ const AddClass = () => {
     const enrolled = 0;
     const status = "pending";
     const feedback = "";
+
     const classDetails = {
       name,
       pictureURL,
@@ -34,19 +33,28 @@ const AddClass = () => {
       feedback,
     };
 
-    axiosSecure.post("/classes", classDetails).then((data) => {
-      console.log(data.data);
-      if (data.data.insertedId) {
-        form.reset();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Class added successful!",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    });
+    console.log(classDetails);
+
+    fetch("http://localhost:5000/classes", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(classDetails),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          form.reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Class added successful!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
   };
   return (
     <div className="w-full px-8 min-h-screen">
@@ -57,7 +65,7 @@ const AddClass = () => {
         subHeading={"new class added"}
         heading={"Add class"}
       ></RoutesTitel>
-      <div className="border-2 p-10 rounded-lg hover:shadow-2xl hover:border-none">
+      <div className=" p-8 sm:w-full md:w-full rounded-lg shadow-2xl">
         <form onClick={handleClassAdded}>
           <div className="grid md:grid-cols-2 gap-5">
             <div className="form-control w-full">
@@ -66,7 +74,8 @@ const AddClass = () => {
               </label>
               <input
                 type="text"
-                value={user?.displayName || user?.name}
+                defaultValue={user?.displayName || user?.name}
+                readOnly
                 name="name"
                 placeholder="Type here"
                 className="input input-bordered w-full "
@@ -74,14 +83,14 @@ const AddClass = () => {
             </div>
             <div className="form-control w-full">
               <label className="label">
-                <span className="label-text">pictureURL</span>
+                <span className="label-text">PictureURL</span>
               </label>
               <input
                 type="url"
-                name="pictureURL"
                 required
+                name="pictureURL"
                 placeholder="Type here"
-                className="input input-bordered w-full "
+                className="input input-bordered w-full"
               />
             </div>
             <div className="form-control w-full">
@@ -102,7 +111,8 @@ const AddClass = () => {
               </label>
               <input
                 type="email"
-                value={user?.email}
+                defaultValue={user?.email}
+                readOnly
                 name="instructorEmail"
                 placeholder="Type here"
                 className="input input-bordered w-full "
@@ -155,7 +165,7 @@ const AddClass = () => {
           <input
             type="submit"
             value="Add a Class"
-            className="btn btn-success w-full mt-10"
+            className="btn btn-success w-full mt-8"
           />
         </form>
       </div>

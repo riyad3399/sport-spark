@@ -17,7 +17,7 @@ const PaymentHistory = () => {
   }, [axiosSecure]);
 
   const handleDeletedHistory = () => {
-    fetch(`https://sport-spark-server-riyad3399.vercel.app/payments`, {
+    fetch(`http://localhost:5000/payments`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -25,12 +25,12 @@ const PaymentHistory = () => {
         console.log(data);
         if (data.deletedCount > 0) {
           Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Your work has been saved',
+            position: "top-end",
+            icon: "success",
+            title: "Your History Clear all successful",
             showConfirmButton: false,
-            timer: 1500
-          })
+            timer: 1500,
+          });
         }
       });
   };
@@ -45,12 +45,12 @@ const PaymentHistory = () => {
         heading={"Payment history"}
       ></RoutesTitel>
       <div className="flex justify-between items-center px-5">
-      <h3 className="text-2xl font-semibold my-5 px-5">
-        Total Payments: {paidClasses.length}
-      </h3>
-      <button onClick={handleDeletedHistory} className="btn ">
-        <FaTrash size={22} /> Clear All
-      </button>
+        <h3 className="text-2xl font-semibold my-5 px-5">
+          Total Payments: {paidClasses.length}
+        </h3>
+        <button onClick={handleDeletedHistory} className="btn ">
+          <FaTrash size={22} /> Clear All
+        </button>
       </div>
       <div className="overflow-x-auto px-5">
         <table className="table">

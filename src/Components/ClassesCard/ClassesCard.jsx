@@ -11,6 +11,7 @@ const ClassesCard = ({ data }) => {
     pictureURL,
     instructorName,
     price,
+    enrolled,
     availableQuantity,
     status,
     _id,
@@ -21,7 +22,7 @@ const ClassesCard = ({ data }) => {
   const [, , refetch] = useCart();
 
   const handleSelectClass = (item) => {
-    setButtonDisabled(true)
+    setButtonDisabled(true);
     console.log(item);
     if (user && user.email) {
       const selectClass = {
@@ -33,7 +34,7 @@ const ClassesCard = ({ data }) => {
         pictureURL,
         email: user.email,
       };
-      fetch("https://sport-spark-server-riyad3399.vercel.app/select-class", {
+      fetch("http://localhost:5000/select-class", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -67,11 +68,8 @@ const ClassesCard = ({ data }) => {
     }
   };
 
-  
-
   return (
     <div>
-      
       <div className="card w-full  hover:shadow-2xl border-2 hover:border-none">
         <figure className="px-8 pt-8">
           <img
@@ -81,7 +79,11 @@ const ClassesCard = ({ data }) => {
           />
         </figure>
         <div className="card-body ">
-          <h2 className="card-title text-2xl">{name}</h2>
+          <h2 className="card-title text-2xl">
+            {name}
+           {enrolled && <div className="badge badge-warning">popular</div>}
+          </h2>
+
           <p className="text-lg">
             Instructor Name:{" "}
             <span className="text-blue-500 ">{instructorName}</span>
@@ -92,6 +94,9 @@ const ClassesCard = ({ data }) => {
           </p>
           <p className="text-lg">
             Price: <span className="text-blue-500">{price}</span>
+          </p>
+          <p className="text-lg">
+            Enrolled: <span className="text-blue-500">{enrolled}</span>
           </p>
 
           <div className="card-actions justify-end">

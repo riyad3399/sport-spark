@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: "https://sport-spark-server-riyad3399.vercel.app",
+  baseURL: "http://localhost:5000",
 });
 
 const useAxiosSecure = () => {
