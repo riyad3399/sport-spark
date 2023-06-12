@@ -9,6 +9,7 @@ const AddClass = () => {
   const handleClassAdded = (event) => {
     event.preventDefault();
     const form = event.target;
+    console.log(form);
     const name = form.name.value;
     const pictureURL = form.pictureURL.value;
     const instructorName = form.instructorName.value;
@@ -35,7 +36,7 @@ const AddClass = () => {
 
     console.log(classDetails);
 
-    fetch("http://localhost:5000/classes", {
+    fetch("https://sport-spark-server-riyad3399.vercel.app/classes", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -66,7 +67,7 @@ const AddClass = () => {
         heading={"Add class"}
       ></RoutesTitel>
       <div className=" p-8 sm:w-full md:w-full rounded-lg shadow-2xl">
-        <form onClick={handleClassAdded}>
+        <form onSubmit={handleClassAdded}>
           <div className="grid md:grid-cols-2 gap-5">
             <div className="form-control w-full">
               <label className="label">
@@ -167,6 +168,7 @@ const AddClass = () => {
             value="Add a Class"
             className="btn btn-success w-full mt-8"
           />
+          
         </form>
       </div>
     </div>

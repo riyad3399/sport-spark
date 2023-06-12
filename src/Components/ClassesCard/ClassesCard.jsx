@@ -2,9 +2,15 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import useCart from "../../hooks/useCart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 
 const ClassesCard = ({ data }) => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const {
     name,
@@ -34,7 +40,7 @@ const ClassesCard = ({ data }) => {
         pictureURL,
         email: user.email,
       };
-      fetch("http://localhost:5000/select-class", {
+      fetch("https://sport-spark-server-riyad3399.vercel.app/select-class", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -69,7 +75,7 @@ const ClassesCard = ({ data }) => {
   };
 
   return (
-    <div>
+    <div data-aos="zoom-out-up" data-aos-duration="2000">
       <div className="card w-full  hover:shadow-2xl border-2 hover:border-none">
         <figure className="px-8 pt-8">
           <img
@@ -81,7 +87,7 @@ const ClassesCard = ({ data }) => {
         <div className="card-body ">
           <h2 className="card-title text-2xl">
             {name}
-           {enrolled && <div className="badge badge-warning">popular</div>}
+            {enrolled && <div className="badge badge-warning">popular</div>}
           </h2>
 
           <p className="text-lg">

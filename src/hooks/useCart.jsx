@@ -8,7 +8,7 @@ const useCart = () => {
     const {data=[], isLoading, refetch} = useQuery({
         queryKey: ['select-class', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/select-class?email=${user?.email}`, {
+            const res = await fetch(`https://sport-spark-server-riyad3399.vercel.app/select-class?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${token}`
                 }

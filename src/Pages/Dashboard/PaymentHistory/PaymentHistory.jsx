@@ -17,7 +17,7 @@ const PaymentHistory = () => {
   }, [axiosSecure]);
 
   const handleDeletedHistory = () => {
-    fetch(`http://localhost:5000/payments`, {
+    fetch(`https://sport-spark-server-riyad3399.vercel.app/payments`, {
       method: "DELETE",
     })
       .then((res) => res.json())

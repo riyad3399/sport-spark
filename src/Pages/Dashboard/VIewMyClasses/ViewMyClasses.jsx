@@ -5,11 +5,12 @@ import { FaTrash } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 
+
 const ViewMyClasses = () => {
   const { user } = useAuth();
   const [viewClasses, setViewClasses] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/instructor-classes/${user?.email}`)
+    fetch(`https://sport-spark-server-riyad3399.vercel.app/instructor-classes/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -28,7 +29,7 @@ const ViewMyClasses = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/instructor-classes/${viewClass._id}`, {
+        fetch(`https://sport-spark-server-riyad3399.vercel.app/instructor-classes/${viewClass._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

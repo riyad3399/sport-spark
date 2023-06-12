@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const ManageClasses = () => {
   const [manageClass, setManageClass] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/classes")
+    fetch("https://sport-spark-server-riyad3399.vercel.app/classes")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -15,7 +15,7 @@ const ManageClasses = () => {
   }, []);
 
   const handleStatus = (mClass) => {
-    fetch(`http://localhost:5000/classes/${mClass._id}`, {
+    fetch(`https://sport-spark-server-riyad3399.vercel.app/classes/${mClass._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())

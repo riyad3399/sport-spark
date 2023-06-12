@@ -29,7 +29,7 @@ const CheckoutForm = ({ item }) => {
 
   useEffect(() => {
     if (transactionId) {
-      fetch(`http://localhost:5000/payments/${item.selectClassId}`, {
+      fetch(`https://sport-spark-server-riyad3399.vercel.app/payments/${item.selectClassId}`, {
         method: "PATCH",
       })
         .then((res) => res.json())
