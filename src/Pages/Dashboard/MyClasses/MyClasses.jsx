@@ -26,6 +26,7 @@ const MyClasses = () => {
               <th className="text-sm">Instructor</th>
               <th className="text-sm">Price</th>
               <th className="text-sm">payment</th>
+              <th className="text-sm">sslPay</th>
               <th className="text-sm">Action</th>
             </tr>
           </thead>
@@ -50,6 +51,11 @@ const MyClasses = () => {
                 <td className="font-medium text-center ">
                   <Link to={`/dashboard/payment/${item._id}`}>
                     <button  className="btn btn-sm btn-success">payment</button>
+                  </Link>
+                </td>
+                <td>
+                <Link to={`/dashboard/sslpayment/${item._id}`}>
+                    <button  className="btn btn-sm btn-secondary">sslpay</button>
                   </Link>
                 </td>
                 <td>

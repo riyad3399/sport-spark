@@ -17,6 +17,9 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
 import AdminRoute from "./AdminRoute";
 import ManageClasses from "../Pages/Dashboard/ManageClasses/ManageClasses";
 import ViewMyClasses from "../Pages/Dashboard/VIewMyClasses/ViewMyClasses";
+import SslPayment from "../Pages/Dashboard/sslPayment/SslPayment";
+import PaymentSuccess from "../Pages/Dashboard/PaymentSuccess/PaymentSuccess";
+import LoginWithAnimation from "../LoginWithAnimation/LoginWithAnimation";
 
 const route = createBrowserRouter([
   {
@@ -27,6 +30,10 @@ const route = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: 'hello',
+        element: <LoginWithAnimation></LoginWithAnimation>
       },
       {
         path: "classes",
@@ -43,6 +50,10 @@ const route = createBrowserRouter([
       {
         path: "login",
         element: <Login></Login>,
+      },
+      {
+        path: 'payment/success/:tranId',
+        element: <PaymentSuccess></PaymentSuccess>
       },
     ],
   },
@@ -70,6 +81,11 @@ const route = createBrowserRouter([
         path: "payment/:id",
         element: <Payment></Payment>,
       },
+      {
+        path: 'sslpayment/:id',
+        element: <SslPayment></SslPayment>
+      },
+     
       {
         path: 'viewmyclasses',
         element: <ViewMyClasses></ViewMyClasses>

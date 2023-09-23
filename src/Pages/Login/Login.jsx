@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import SocialLogin from "../shared/SocialLogin/SocialLogin";
+import { TextField } from "@mui/material";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,12 +18,7 @@ const Login = () => {
 
   const from = location.state?.from?.pathname || "/";
 
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, reset, handleSubmit } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     signIn(data.email, data.password)
@@ -62,29 +58,23 @@ const Login = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               {errorMessage && <p className="text-red-500">{errorMessage}</p>}
               <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
+                <TextField
+                  id="outlined-email-input"
+                  label="email"
                   type="email"
-                  placeholder="email"
-                  className="input input-bordered"
                   {...register("email", { required: true })}
                 />
               </div>
-              <div className="form-control relative">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input
+              <div className="form-control relative mt-3L">
+                <TextField
+                  id="outlined-password-input"
+                  label="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="password"
-                  className="input input-bordered"
                   {...register("password", { required: true })}
                 />
                 <p
                   onClick={handleShowPass}
-                  className="absolute bottom-3 right-3"
+                  className="absolute bottom-4 right-3"
                 >
                   {" "}
                   {showPassword ? (
