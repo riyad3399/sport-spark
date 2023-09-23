@@ -75,13 +75,13 @@ const ClassesCard = ({ data }) => {
   };
 
   return (
-    <div data-aos="zoom-out-up" data-aos-duration="2000">
-      <div className="card w-full  hover:shadow-2xl border-2 hover:border-none">
+    <div>
+      <div className="card w-full shadow-xl group">
         <figure className="px-8 pt-8">
           <img
             src={pictureURL}
             alt="classes"
-            className="rounded-xl hover:scale-105 duration-200 hover:rounded-lg"
+            className="rounded-lg group-hover:scale-105 transition"
           />
         </figure>
         <div className="card-body ">

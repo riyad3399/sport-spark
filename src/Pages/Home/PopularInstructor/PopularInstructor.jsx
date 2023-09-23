@@ -22,7 +22,7 @@ const PopularInstructor = () => {
         subHeading={"Top 6 popular Instructor"}
         heading={"popular instructor"}
           ></RoutesTitel>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+          <div className="grid  md:grid-cols-2 gap-6 my-8">
               {
                   datas.slice(0, 6).map(data => <InstructorCard key={data._id} data={data}></InstructorCard>)
               }

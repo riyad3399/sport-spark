@@ -6,9 +6,9 @@ const InstructorCard = ({ data }) => {
   const { name, image, email, phone } = data;
   return (
     <div className="w-full">
-      <div className="card card-side bg-base-100 hover:shadow-2xl border-2 hover:border-none w-full ">
-        <div className="w-1/2">
-          <img src={image} className="rounded-lg h-full" alt="Movie" />
+      <div className="card card-side bg-base-100 shadow-xl group">
+        <div className="lg:w-1/2 ">
+          <img src={image} className=" h-full group-hover:scale-95 hover:rounded-md transition" alt="instructor" />
         </div>
         <div className="card-body w-1/2 px-3">
           <h2 className="card-title font-bold">{name}</h2>

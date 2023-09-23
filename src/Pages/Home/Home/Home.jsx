@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+
 const Home = () => {
   useEffect(() => {
     AOS.init();
@@ -16,16 +17,17 @@ const Home = () => {
       <Helmet>
         <title>Home - Sport Spark</title>
       </Helmet>
-      <Banner></Banner>
-      <div data-aos="fade-down-right">
-        <PopularClasses></PopularClasses>
-      </div>
-      <div data-aos="zoom-out-up">
-        <PopularInstructor></PopularInstructor>
-      </div>
-      <div data-aos="zoom-in-down">
-        <ExtraSection></ExtraSection>
-      </div>
+
+        <Banner></Banner>
+        <div >
+          <PopularClasses></PopularClasses>
+        </div>
+        <div >
+          <PopularInstructor></PopularInstructor>
+        </div>
+        <div >
+          <ExtraSection></ExtraSection>
+        </div>
     </div>
   );
 };

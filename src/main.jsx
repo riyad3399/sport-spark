@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import route from "./Routes/Routes";
-import Container from "./Components/shared/Container";
+import { Container } from "@mui/material";
 import { HelmetProvider } from "react-helmet-async";
 import AuthProvider from "./Provider/AuthProvider";
 import { QueryClient, QueryClientProvider } from "react-query";
