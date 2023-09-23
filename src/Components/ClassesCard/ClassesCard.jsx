@@ -19,7 +19,7 @@ const ClassesCard = ({ data }) => {
     price,
     enrolled,
     availableQuantity,
-    status,
+
     _id,
   } = data;
   const { user } = useAuth();
