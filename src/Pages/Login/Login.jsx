@@ -65,7 +65,7 @@ const Login = () => {
                   {...register("email", { required: true })}
                 />
               </div>
-              <div className="form-control relative mt-3L">
+              <div className="form-control relative mt-3">
                 <TextField
                   id="outlined-password-input"
                   label="password"
