@@ -7,14 +7,12 @@ const SslPayment = () => {
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     data.classId = id;
 
-    fetch("http://localhost:5000/classpayment", {
+    fetch("/classpayment", {
       method: "POST",
       headers: {
         "content-type": "application/json",
