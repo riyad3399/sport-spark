@@ -22,7 +22,6 @@ const PrivateRoute = ({ children }) => {
           radius={5}
           color="#0000FF"
           ariaLabel="ball-triangle-loading"
-          wrapperClass={{}}
           wrapperStyle=""
           visible={true}
         />

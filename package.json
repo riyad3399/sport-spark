@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.11",
     "@mui/material": "^5.14.10",
     "@stripe/react-stripe-js": "^2.1.0",
     "@stripe/stripe-js": "^1.54.0",
@@ -26,6 +27,7 @@
     "react-hook-form": "^7.44.3",
     "react-icons": "^4.9.0",
     "react-loader-spinner": "^5.3.4",
+    "react-paginate": "^8.2.0",
     "react-query": "^3.39.3",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.12.0",

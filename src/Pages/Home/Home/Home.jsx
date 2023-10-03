@@ -18,7 +18,8 @@ const Home = () => {
         <title>Home - Sport Spark</title>
       </Helmet>
 
-        <Banner></Banner>
+      <Banner></Banner>
+     
         <div >
           <PopularClasses></PopularClasses>
         </div>

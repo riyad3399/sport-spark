@@ -21,7 +21,7 @@ const ToggleThem = () => {
   return (
     <div>
       <label className="swap swap-rotate">
-        <input type="checkbox" onChange={handleToggle}/>
+        <input type="checkbox" onChange={handleToggle} />
 
         <svg
           className="swap-on fill-current w-8 h-8"

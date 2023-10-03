@@ -16,7 +16,11 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.from?.pathname || "/";
+  const from = location?.state?.from?.pathname || "/";
+
+
+
+
 
   const { register, reset, handleSubmit } = useForm();
   const onSubmit = (data) => {
@@ -32,7 +36,7 @@ const Login = () => {
           icon: "success",
           confirmButtonText: "ok",
         });
-        navigate(from, { replace: true });
+        navigate(from, {replace: true});
       })
       .catch((error) => {
         console.log(error);
@@ -43,6 +47,9 @@ const Login = () => {
   const handleShowPass = () => {
     setShowPassword(!showPassword);
   };
+
+
+
   return (
     <div>
       <Helmet>
@@ -55,26 +62,30 @@ const Login = () => {
             <img src={loginImg} alt="" />
           </div>
           <div className="card flex-shrink-0 md:w-1/2 sm:w-full max-w-sm shadow-2xl bg-base-100">
-            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body space-y-2 py-8">
               {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-              <div className="form-control">
+              <div>
                 <TextField
                   id="outlined-email-input"
                   label="email"
                   type="email"
+                  variant="outlined"
+                  className="text-blue-500 w-full "
                   {...register("email", { required: true })}
                 />
               </div>
-              <div className="form-control relative mt-3">
+              <div className=" relative ">
                 <TextField
                   id="outlined-password-input"
                   label="password"
+                  className="w-full text-blue-500"
+                  variant="outlined"
                   type={showPassword ? "text" : "password"}
                   {...register("password", { required: true })}
                 />
                 <p
                   onClick={handleShowPass}
-                  className="absolute bottom-4 right-3"
+                  className="absolute top-[18px] right-3"
                 >
                   {" "}
                   {showPassword ? (

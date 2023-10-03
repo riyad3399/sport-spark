@@ -43,19 +43,20 @@ const route = createBrowserRouter([
         path: "instructor",
         element: <Instructor></Instructor>,
       },
-      {
-        path: "signup",
-        element: <SignUp></SignUp>,
-      },
-      {
-        path: "login",
-        element: <Login></Login>,
-      },
+    
       {
         path: 'payment/success/:tranId',
         element: <PaymentSuccess></PaymentSuccess>
       },
     ],
+  },
+  {
+    path: "signup",
+    element: <SignUp></SignUp>,
+  },
+  {
+    path: "login",
+    element: <Login></Login>,
   },
   {
     path: "dashboard",

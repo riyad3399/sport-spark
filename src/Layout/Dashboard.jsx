@@ -1,5 +1,12 @@
 import { Helmet } from "react-helmet-async";
-import { FaHome, FaUsers, FaWallet, FaCheckCircle, FaSchool, FaBuilding,  } from "react-icons/fa";
+import {
+  FaHome,
+  FaUsers,
+  FaWallet,
+  FaCheckCircle,
+  FaSchool,
+  FaBuilding,
+} from "react-icons/fa";
 import { LuSchool } from "react-icons/lu";
 import { AiFillFileAdd } from "react-icons/ai";
 import { CiViewList } from "react-icons/ci";
@@ -14,7 +21,7 @@ const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
   const { user } = useAuth();
-  console.log(user)
+  console.log(user);
 
   const adminMenu = (
     <>
@@ -39,7 +46,7 @@ const Dashboard = () => {
   const instructorMenu = (
     <>
       <li>
-        <NavLink to='/dashboard/instructor'>
+        <NavLink to="/dashboard/instructor">
           {" "}
           <FaHome size={22} /> Instructor Home
         </NavLink>
@@ -51,7 +58,8 @@ const Dashboard = () => {
       </li>
       <li>
         <NavLink to="/dashboard/viewmyclasses">
-          <CiViewList  size={22} />View My Classes
+          <CiViewList size={22} />
+          View My Classes
         </NavLink>
       </li>
     </>
@@ -101,7 +109,6 @@ const Dashboard = () => {
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content bg-gray-100 flex flex-col items-center justify-center">
-          
           <Outlet></Outlet>
           <label
             htmlFor="my-drawer-2"
@@ -113,10 +120,14 @@ const Dashboard = () => {
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 h-full bg-base-300 text-base-content">
-          <div className="flex flex-col gap-2 items-center py-8 bg-gray-200 rounded-md">
-              <img className="rounded-full h-20 w-20" src={user?.photoURL} alt="" />
-              <h3 className="text-base font-semibold">{ user.displayName}</h3>
-          </div>
+            <div className="flex flex-col gap-2 items-center py-8 bg-gray-200 rounded-md">
+              <img
+                className="rounded-full h-20 w-20"
+                src={user?.photoURL}
+                alt="userPhoto"
+              />
+              <h3 className="text-base font-semibold">{user.displayName}</h3>
+            </div>
             {mainMenu}
             <div className="divider"></div>
             <li>
@@ -126,7 +137,7 @@ const Dashboard = () => {
             </li>
             <li>
               <NavLink to="/classes">
-               <FaSchool size={22}/>  classes
+                <FaSchool size={22} /> classes
               </NavLink>
             </li>
           </ul>

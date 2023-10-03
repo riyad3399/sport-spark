@@ -1,47 +1,56 @@
+import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../../assets/logo.jpg";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 import useAuth from "../../../hooks/useAuth";
-import Swal from "sweetalert2";
 import ToggleThem from "../../../Components/ToggleThem/ToggleThem";
+import logo from "../../../assets/logo.jpg";
+import Swal from "sweetalert2";
+import { ExitToApp } from "@mui/icons-material";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
 
   const menuItems = (
-    <>
-      <li>
-        <NavLink to="/" className="text-[16px] font-semibold text-black nav">
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="classes"
-          className="text-[16px] font-semibold text-black nav"
-        >
-          Classes
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/instructor"
-          className="text-[16px] font-semibold text-black nav"
-        >
-          Instructors
-        </NavLink>
-      </li>
+    <List>
+      <ListItem button component={NavLink} to="/" onClick={toggleDrawer}>
+        <ListItemText primary="Home" />
+      </ListItem>
+      <ListItem button component={NavLink} to="/classes" onClick={toggleDrawer}>
+        <ListItemText primary="Classes" />
+      </ListItem>
+      <ListItem
+        button
+        component={NavLink}
+        to="/instructor"
+        onClick={toggleDrawer}
+      >
+        <ListItemText primary="Instructors" />
+      </ListItem>
 
       {user && (
-        <li>
-          <NavLink
-            to="/dashboard"
-            className="text-[16px] font-semibold text-black nav"
-          >
-            Dashboard
-          </NavLink>
-        </li>
+        <ListItem
+          button
+          component={NavLink}
+          to="/dashboard"
+          onClick={toggleDrawer}
+        >
+          <ListItemText primary="Dashboard" />
+        </ListItem>
       )}
-    </>
+    </List>
   );
 
   const handleLogout = () => {
@@ -62,65 +71,117 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar fixed z-10 max-w-screen-xl bg-base-100">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+      {/* Mobile Navbar */}
+      <AppBar
+        position="fixed"
+        color="inherit"
+        sx={{ display: { xs: "block", sm: "none" } }}
+      >
+        <Toolbar className="flex justify-between items-center">
+          <div className="flex justify-center">
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={toggleDrawer}
             >
-              {menuItems}
-            </ul>
+              <MenuIcon />
+            </IconButton>
+            <Link to="/">
+              <img src={logo} alt="" style={{ marginRight: "16px" }} />
+            </Link>
+          </div>
+          <ToggleThem />
+        </Toolbar>
+      </AppBar>
+      {/* Tablet and Desktop Navbar */}
+      <AppBar
+        position="fixed"
+        color="inherit"
+        className="md:py-2"
+        sx={{ display: { xs: "none", sm: "block" } }}
+      >
+        <Toolbar className="flex justify-between items-center">
+          <Link to="/">
+            <img
+              src={logo}
+              alt="Logo"
+              className="w-[80%] object-cover"
+              style={{ marginRight: "16px" }}
+            />
+          </Link>
+          <div className="flex justify-center">
+            <Button
+              color="inherit"
+              component={NavLink}
+              to="/"
+              className="text-[16px] font-semibold text-black nav"
+            >
+              Home
+            </Button>
+            <Button
+              color="inherit"
+              component={NavLink}
+              to="/classes"
+              className="text-[16px] font-semibold text-black nav"
+            >
+              Classes
+            </Button>
+            <Button
+              color="inherit"
+              component={NavLink}
+              to="/instructor"
+              className="text-[16px] font-semibold text-black nav"
+            >
+              Instructors
+            </Button>
+            {user && (
+              <Button
+                color="inherit"
+                component={NavLink}
+                to="/dashboard"
+                className="text-[16px] font-semibold text-black nav"
+              >
+                Dashboard
+              </Button>
+            )}
           </div>
 
-          <Link to="/">
-            {" "}
-            <img src={logo} alt="" />
-          </Link>
-          <div className="ml-4">
-            <ToggleThem></ToggleThem>
-          </div>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{menuItems}</ul>
-        </div>
-        <div className="navbar-end pr-8 sm:pr-8">
           {user ? (
-            <>
-              <div className="flex flex-row gap-2 items-center">
-                <img
-                  className="h-[50px] w-[50px] border-2 rounded-full hidden sm:hidden md:block"
-                  src={user && user.photoURL}
-                  alt=""
-                />
-                <button onClick={handleLogout} className="btn-custom">
-                  Logout
-                </button>
-              </div>
-            </>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <img
+                className="h-[50px] w-[50px] border-2 rounded-full hidden sm:hidden md:block"
+                src={user && user.photoURL}
+                alt="user Photo"
+              />
+              <Button
+                variant="contained"
+                color="secondary"
+                startIcon={<ExitToApp />}
+                onClick={handleLogout}
+                style={{ marginLeft: "16px" }}
+              >
+                Logout
+              </Button>
+            </div>
           ) : (
-            <NavLink to="/login">
-              <button className="btn-custom">Login</button>
-            </NavLink>
+            <Link to="/login">
+              <Button variant="contained" color="primary">
+                Login
+              </Button>
+            </Link>
           )}
-        </div>
-      </div>
+        </Toolbar>
+      </AppBar>
+      {/* Mobile Drawer */}
+      <Drawer
+        anchor="left"
+        open={isDrawerOpen}
+        onClose={toggleDrawer}
+        sx={{ display: { xs: "block", sm: "none" } }}
+      >
+        {menuItems}
+      </Drawer>
     </>
   );
 };

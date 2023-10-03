@@ -10,10 +10,20 @@ import { TextField } from "@mui/material";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile } = useAuth();
+  const { createUser, updateUserProfile, logOut } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        console.log("log out")
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const {
     register,
@@ -21,6 +31,7 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
     console.log(data);
     if (data.password !== data.confirm) {
@@ -55,7 +66,7 @@ const SignUp = () => {
                   showConfirmButton: false,
                   timer: 1500,
                 });
-                navigate("/");
+              
               }
             });
           Swal.fire({
@@ -67,7 +78,9 @@ const SignUp = () => {
             rgba(0,0,123,0.4)
           `,
           });
-          updateUserProfile(data.name, data.photo).then(() => {});
+          updateUserProfile(data.name, data.photo).then(() => { });
+          handleLogout()
+          navigate("/login");
         })
         .catch((error) => {
           console.log(error);
@@ -80,11 +93,11 @@ const SignUp = () => {
   };
 
   return (
-    <div>
+    <div className="my-8">
       <Helmet>
         <title>SignUp - Sport Spark</title>
       </Helmet>
-      <h1 className="text-4xl text-center my-5 font-semibold">Sign Up Now!</h1>
+      <h1 className="text-4xl text-center mb-5 font-semibold">Sign Up Now!</h1>
       <div className="hero min-h-screen w-full">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left md:w-1/2 sm:w-full">
@@ -142,10 +155,10 @@ const SignUp = () => {
                 )}
                 <p
                   onClick={handleShowPassword}
-                  className="absolute top-4 right-2"
+                  className="absolute top-[18px] right-2"
                 >
                   {showPassword ? (
-                    <FaEye className="text-blue-600" size={20} />
+                    <FaEye className="text-blue-500" size={20} />
                   ) : (
                     <FaEyeSlash size={20} />
                   )}

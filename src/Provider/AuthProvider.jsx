@@ -58,7 +58,6 @@ const AuthProvider = ({ children }) => {
         axios
           .post("https://sport-spark-server-riyad3399.vercel.app/jwt", { email: currentUser.email })
           .then((data) => {
-            console.log(data.data.token);
             localStorage.setItem("access-token", data.data.token);
             setLoading(false);
           });
