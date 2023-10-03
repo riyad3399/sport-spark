@@ -44,16 +44,14 @@ const SocialLogin = () => {
   return (
     <div>
       <div className="flex flex-row justify-center gap-4">
-              <button
-                  type="button"
+        <button
+          type="button"
           onClick={handleGoogleLogin}
           className="btn btn-outline btn-primary btn-circle"
         >
-          {" "}
           <FaGoogle size={22} />{" "}
         </button>
         <button type="button" className="btn btn-outline btn-circle">
-          {" "}
           <FaGithub size={22} />{" "}
         </button>
       </div>

@@ -6,11 +6,14 @@ import Swal from "sweetalert2";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import SocialLogin from "../shared/SocialLogin/SocialLogin";
+import { TextField } from "@mui/material";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -72,55 +75,53 @@ const SignUp = () => {
     }
   };
 
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div>
       <Helmet>
-        <title>Signup - Sport Spark</title>
+        <title>SignUp - Sport Spark</title>
       </Helmet>
-      <h1 className="text-4xl text-center my-5 font-semibold">Sign up Now!</h1>
+      <h1 className="text-4xl text-center my-5 font-semibold">Sign Up Now!</h1>
       <div className="hero min-h-screen w-full">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left md:w-1/2 sm:w-full">
             <img src={regesterImg} alt="" />
           </div>
           <div className="card flex-shrink-0 md:w-1/2 sm:w-full max-w-sm shadow-2xl bg-base-100">
-            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Name</span>
-                </label>
-                <input
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="card-body space-y-2"
+            >
+              <div>
+                <TextField
                   type="text"
-                  placeholder="Name"
-                  className="input input-bordered"
+                  label="Name"
+                  className="w-full"
                   {...register("name", { required: true })}
                 />
                 {errors.name && (
                   <span className="text-red-600">Name is required</span>
                 )}
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
+              <div>
+                <TextField
                   type="email"
-                  placeholder="email"
-                  className="input input-bordered"
+                  label="Email"
+                  className="w-full"
                   {...register("email", { required: true })}
                 />
                 {errors.email && (
                   <span className="text-red-600">Email is required</span>
                 )}
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="password"
-                  className="input input-bordered"
+              <div className="relative">
+                <TextField
+                  type={showPassword ? "text" : "password"}
+                  label="Password"
+                  className="w-full "
                   {...register("password", {
                     required: true,
                     minLength: 6,
@@ -139,15 +140,22 @@ const SignUp = () => {
                     Password must have one Uppercase and one special character.
                   </p>
                 )}
+                <p
+                  onClick={handleShowPassword}
+                  className="absolute top-4 right-2"
+                >
+                  {showPassword ? (
+                    <FaEye className="text-blue-600" size={20} />
+                  ) : (
+                    <FaEyeSlash size={20} />
+                  )}
+                </p>
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Confirm Password</span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="confirm password"
-                  className="input input-bordered"
+              <div>
+                <TextField
+                  type={showPassword ? "text" : "password"}
+                  label="Confirm Password"
+                  className="w-full"
                   {...register("confirm", { required: true })}
                 />
                 {errors.confirm && (
@@ -159,14 +167,11 @@ const SignUp = () => {
                   <span className="text-red-600">{errorMessage}</span>
                 )}
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Photo URL</span>
-                </label>
-                <input
+              <div>
+                <TextField
                   type="url"
-                  placeholder="photo URL"
-                  className="input input-bordered"
+                  label="Photo URL"
+                  className="w-full"
                   {...register("photo", { required: true })}
                 />
                 {errors.photoURL && (
