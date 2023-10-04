@@ -121,8 +121,8 @@ const ViewMyClasses = () => {
           </tbody>
         </table>
       </div>
-      {/* Pagination */}
-      <div className="flex justify-end my-8 mr-4">
+
+     {currentClasses.length > 10 && <div className="flex justify-end my-8 mr-4">
         <ReactPaginate
           previousLabel={"<Previous"}
           nextLabel={"Next>"}
@@ -134,17 +134,11 @@ const ViewMyClasses = () => {
           containerClassName={"pagination flex justify-center space-x-2 mt-4"}
           subContainerClassName={"pages pagination flex space-x-2"}
           activeClassName={"bg-blue-500 text-white rounded-full px-3 py-1"}
-          pageClassName={
-            "rounded-full px-3 py-1 hover:bg-blue-200 cursor-pointer"
-          }
-          previousClassName={
-            "px-3 py-1 rounded-full hover:bg-blue-200 cursor-pointer border-2"
-          }
-          nextClassName={
-            "px-3 py-1 rounded-full hover:bg-blue-200 cursor-pointer border-2"
-          }
+          pageClassName={"rounded-full px-3 py-1 hover:bg-blue-200 cursor-pointer"}
+          previousClassName={"px-3 py-1 rounded-full hover:bg-blue-200 cursor-pointer border-2"}
+          nextClassName={"px-3 py-1 rounded-full hover:bg-blue-200 cursor-pointer border-2"}
         />
-      </div>
+      </div>}
     </div>
   );
 };

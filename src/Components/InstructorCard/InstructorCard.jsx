@@ -4,7 +4,7 @@ import { useState } from "react";
 const InstructorCard = ({ data }) => {
   const { user } = useAuth();
   const { name, image, email, phone } = data;
-  console.log(data);
+
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -14,11 +14,11 @@ const InstructorCard = ({ data }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className=" rounded-lg p-6 hover:shadow-lg transition-transform hover:border">
+      <div className=" rounded-lg p-6 hover:shadow-lg transition-transform ">
         <div className="relative ">
           <img
             src={image}
-            className={`w-full h-auto rounded-lg ${
+            className={`w-full h-auto object-cover md:h-60 md:w-full rounded-lg ${
               isHovered ? "opacity-60" : "opacity-100"
             }`}
             alt="instructor"

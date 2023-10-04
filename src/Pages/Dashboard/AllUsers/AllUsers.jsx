@@ -4,6 +4,7 @@ import { RiAdminLine } from "react-icons/ri";
 import { useQuery } from "react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/axiosSecure";
+import RoutesTitel from "../../../Components/RoutesTitle/RoutesTitle";
 
 const AllUsers = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -84,7 +85,11 @@ const AllUsers = () => {
       <Helmet>
         <title>All Users - Sport Spark</title>
       </Helmet>
-      <h3 className="text-3xl font-semibold">Total Users: {users.length}</h3>
+      <RoutesTitel
+        subHeading={"Show All Users"}
+        heading={"All Users"}
+      ></RoutesTitel>
+      <h3 className="text-3xl font-semibold my-4">Total Users: {users.length}</h3>
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}

@@ -8,7 +8,7 @@ const SocialLogin = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.from?.pathname || "/";
+  const from = location?.state?.from?.pathname || "/";
 
   const handleGoogleLogin = () => {
     loginWithGoogle()
@@ -18,6 +18,8 @@ const SocialLogin = () => {
         const saveUser = {
           name: loggedUser.displayName,
           email: loggedUser.email,
+          image: loggedUser.photoURL,
+          role: "user"
         };
         fetch("https://sport-spark-server-riyad3399.vercel.app/users", {
           method: "POST",

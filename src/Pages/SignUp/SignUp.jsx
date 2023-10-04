@@ -46,7 +46,7 @@ const SignUp = () => {
           const saveUser = {
             name: data.name,
             email: data.email,
-            image: data.photo || data.photoURL,
+            image: data.photo,
           };
           fetch("https://sport-spark-server-riyad3399.vercel.app/users", {
             method: "POST",

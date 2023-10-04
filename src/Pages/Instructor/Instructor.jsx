@@ -19,7 +19,7 @@ const Instructor = () => {
   );
 
   return (
-    <div className="pt-12">
+    <div className="py-12">
       <Helmet>
         <title>Instructor - Sport Spark</title>
       </Helmet>
