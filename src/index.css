@@ -8,8 +8,8 @@
 
   
   .nav.active{
-    background-color: #de8c9a;
-    color: black;
+    background-color: #1565c0;
+    color: #ffff;
 
   }
   .nav{
@@ -17,9 +17,9 @@
   }
 
   .drawer-side a.active {
-    color: green;
+    color: #ffff;
     font-size: medium;
-    background-color: aquamarine;
+    background-color: #1565c0;
    
   }
   .drawer-side a {

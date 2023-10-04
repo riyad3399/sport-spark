@@ -9,7 +9,7 @@ const Main = () => {
       <Navbar></Navbar>
       <div className="min-h-screen pt-24">
         <Outlet></Outlet>
-        <button className="top-[120px] right-0 fixed btn rounded-l-full hidden sm:block ">
+        <button className="top-[120px] right-0 fixed btn rounded-l-full hidden sm:block">
           <ToggleThem />
         </button>
       </div>

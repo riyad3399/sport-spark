@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 
 const Instructor = () => {
   const [instructorData, setInstructorData] = useState([]);
-  console.log(instructorData);
+
 
   useEffect(() => {
     fetch("http://localhost:5000/usersdata/instructor")
@@ -23,7 +23,7 @@ const Instructor = () => {
       <Helmet>
         <title>Instructor - Sport Spark</title>
       </Helmet>
-      <div className="grid md:grid-cols-2 gap-5">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 ">
         {datas?.map((data) => (
           <InstructorCard key={data._id} data={data}></InstructorCard>
         ))}

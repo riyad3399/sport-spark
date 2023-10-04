@@ -4,13 +4,18 @@ import RoutesTitel from "../../../Components/RoutesTitle/RoutesTitle";
 import { FaTrash } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
-
+import ReactPaginate from "react-paginate";
 
 const ViewMyClasses = () => {
   const { user } = useAuth();
   const [viewClasses, setViewClasses] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0); // Current page index
+  const classesPerPage = 10; // Number of classes to display per page
+
   useEffect(() => {
-    fetch(`https://sport-spark-server-riyad3399.vercel.app/instructor-classes/${user?.email}`)
+    fetch(
+      `https://sport-spark-server-riyad3399.vercel.app/instructor-classes/${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -29,18 +34,37 @@ const ViewMyClasses = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://sport-spark-server-riyad3399.vercel.app/instructor-classes/${viewClass._id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://sport-spark-server-riyad3399.vercel.app/instructor-classes/${viewClass._id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
             if (data.deletedCount > 0) {
               Swal.fire("Deleted!", "Deleted your class", "success");
+              // After successful delete, you can update the viewClasses state
+              // to reflect the changes. For example:
+              const updatedClasses = viewClasses.filter(
+                (cls) => cls._id !== viewClass._id
+              );
+              setViewClasses(updatedClasses);
             }
           });
       }
     });
+  };
+
+  // Calculate the index range for the current page
+  const indexOfLastClass = (currentPage + 1) * classesPerPage;
+  const indexOfFirstClass = indexOfLastClass - classesPerPage;
+  const currentClasses = viewClasses.slice(indexOfFirstClass, indexOfLastClass);
+
+  // Handle page change
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
   };
 
   return (
@@ -69,7 +93,7 @@ const ViewMyClasses = () => {
             </tr>
           </thead>
           <tbody>
-            {viewClasses.map((viewClass, index) => (
+            {currentClasses.map((viewClass, index) => (
               <tr key={viewClass._id}>
                 <th>{index + 1}</th>
                 <td>
@@ -96,6 +120,30 @@ const ViewMyClasses = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      {/* Pagination */}
+      <div className="flex justify-end my-8 mr-4">
+        <ReactPaginate
+          previousLabel={"<Previous"}
+          nextLabel={"Next>"}
+          breakLabel={"..."}
+          pageCount={Math.ceil(viewClasses.length / classesPerPage)}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageChange}
+          containerClassName={"pagination flex justify-center space-x-2 mt-4"}
+          subContainerClassName={"pages pagination flex space-x-2"}
+          activeClassName={"bg-blue-500 text-white rounded-full px-3 py-1"}
+          pageClassName={
+            "rounded-full px-3 py-1 hover:bg-blue-200 cursor-pointer"
+          }
+          previousClassName={
+            "px-3 py-1 rounded-full hover:bg-blue-200 cursor-pointer border-2"
+          }
+          nextClassName={
+            "px-3 py-1 rounded-full hover:bg-blue-200 cursor-pointer border-2"
+          }
+        />
       </div>
     </div>
   );

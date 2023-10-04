@@ -17,6 +17,8 @@ const Login = () => {
   const location = useLocation();
 
   const from = location?.state?.from?.pathname || "/";
+  // console.log('location ',from)
+  console.log("location",from)
 
 
 

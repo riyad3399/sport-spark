@@ -51,21 +51,19 @@ const Classes = () => {
       </div>
 
       {/* Pagination component */}
-      <div className="flex justify-end my-8">
+      <div className="flex justify-end my-8 mr-4">
         <ReactPaginate
           pageCount={pageCount}
           pageRangeDisplayed={5}
           marginPagesDisplayed={2}
           onPageChange={handlePageChange}
           containerClassName={"pagination flex space-x-2"}
-          activeClassName={"active bg-blue-500 text-white"}
-          pageClassName={"bg-gray-200 p-2 rounded-md"}
-          previousLabel={"<"}
-          nextLabel={">"}
-          previousLinkClassName={
-            "text-blue-500 hover:bg-gray-300   btn btn-circle"
-          }
-          nextLinkClassName={"text-blue-500 hover:bg-gray-300 btn-circle btn"}
+          activeClassName={"bg-blue-500 text-white rounded-full px-3 py-1"}
+          pageClassName={"rounded-full px-3 py-1 hover:bg-blue-200 cursor-pointer"}
+          previousLabel={"<Previous"}
+          nextLabel={"Next>"}
+          previousClassName={"px-3 py-1 rounded-full hover:bg-blue-200 cursor-pointer border-2"}
+          nextClassName={"px-3 py-1 rounded-full hover:bg-blue-200 cursor-pointer border-2"}
           breakLabel={"..."}
           breakLinkClassName={"text-gray-600"} // Style the "Break" label text
         />

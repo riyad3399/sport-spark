@@ -57,7 +57,6 @@ const Navbar = () => {
     logOut()
       .then(() => {
         Swal.fire({
-          position: "top-end",
           icon: "success",
           title: "Logout successful",
           showConfirmButton: false,
@@ -98,7 +97,7 @@ const Navbar = () => {
       <AppBar
         position="fixed"
         color="inherit"
-        className="md:py-2"
+        className="md:py-1"
         sx={{ display: { xs: "none", sm: "block" } }}
       >
         <Toolbar className="flex justify-between items-center">
