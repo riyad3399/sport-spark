@@ -1,8 +1,8 @@
-import logo from "../../../assets/logo.jpg";
+import logo from "../../../assets/logo.png";
 
 const Footer = () => {
   return (
-    <div className="w-full">
+    <div className="min-w-full">
       <footer className="footer p-10 bg-base-200 text-base-content">
         <div>
           <span className="footer-title">Services</span>
@@ -26,13 +26,13 @@ const Footer = () => {
         </div>
       </footer>
       <footer className="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
-        <div className="items-center grid-flow-col">
-          <img src={logo} alt="" />
-          <p>
-           <span className="text-2xl font-bold"> Sport Spark</span><br />
-            Providing reliable tech since 1992
-          </p>
-        </div>
+        <img
+          src={logo}
+          alt="logo"
+          className="w-[190px] h-[70px] object-cover"
+        />{" "}
+        
+        <p className="md:mt-8 ">Providing reliable tech since 1992</p>
         <div className="md:place-self-center md:justify-self-end">
           <div className="grid grid-flow-col gap-4">
             <a className="cursor-pointer">

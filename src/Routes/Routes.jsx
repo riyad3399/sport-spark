@@ -20,6 +20,7 @@ import ViewMyClasses from "../Pages/Dashboard/VIewMyClasses/ViewMyClasses";
 import SslPayment from "../Pages/Dashboard/sslPayment/SslPayment";
 import PaymentSuccess from "../Pages/Dashboard/PaymentSuccess/PaymentSuccess";
 import LoginWithAnimation from "../LoginWithAnimation/LoginWithAnimation";
+import MyBookmark from "../Pages/Dashboard/MyBookmark/MyBookmark";
 
 const route = createBrowserRouter([
   {
@@ -32,8 +33,8 @@ const route = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: 'hello',
-        element: <LoginWithAnimation></LoginWithAnimation>
+        path: "hello",
+        element: <LoginWithAnimation></LoginWithAnimation>,
       },
       {
         path: "classes",
@@ -43,10 +44,10 @@ const route = createBrowserRouter([
         path: "instructor",
         element: <Instructor></Instructor>,
       },
-    
+
       {
-        path: 'payment/success/:tranId',
-        element: <PaymentSuccess></PaymentSuccess>
+        path: "payment/success/:tranId",
+        element: <PaymentSuccess></PaymentSuccess>,
       },
     ],
   },
@@ -71,6 +72,11 @@ const route = createBrowserRouter([
         element: <MyClasses></MyClasses>,
       },
       {
+        path: "myBookmark/:email",
+        element: <MyBookmark />,
+        loader: ({ params }) => fetch(`http://localhost:5000/bookmark/${params.email}`),
+      },
+      {
         path: "myenrolled",
         element: <MyEnrolled></MyEnrolled>,
       },
@@ -83,13 +89,13 @@ const route = createBrowserRouter([
         element: <Payment></Payment>,
       },
       {
-        path: 'sslpayment/:id',
-        element: <SslPayment></SslPayment>
+        path: "sslpayment/:id",
+        element: <SslPayment></SslPayment>,
       },
-     
+
       {
-        path: 'viewmyclasses',
-        element: <ViewMyClasses></ViewMyClasses>
+        path: "viewmyclasses",
+        element: <ViewMyClasses></ViewMyClasses>,
       },
       // admin routes
       {
@@ -101,8 +107,8 @@ const route = createBrowserRouter([
         ),
       },
       {
-        path: 'manageclass',
-        element: <ManageClasses></ManageClasses>
+        path: "manageclass",
+        element: <ManageClasses></ManageClasses>,
       },
       {
         path: "addclass",

@@ -2,6 +2,7 @@ import { FaGithub, FaGoogle } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const SocialLogin = () => {
   const { loginWithGoogle } = useAuth();
@@ -45,17 +46,24 @@ const SocialLogin = () => {
 
   return (
     <div>
-      <div className="flex flex-row justify-center gap-4">
-        <button
+      <div className="flex flex-col justify-center gap-4">
+        <Button
           type="button"
+          variant="outlined"
           onClick={handleGoogleLogin}
-          className="btn btn-outline btn-primary btn-circle"
+          size="large"
+          startIcon={<FaGoogle size={22} />}
         >
-          <FaGoogle size={22} />{" "}
-        </button>
-        <button type="button" className="btn btn-outline btn-circle">
-          <FaGithub size={22} />{" "}
-        </button>
+          Login with Google
+        </Button>
+        <Button
+          type="button"
+          variant="outlined"
+          size="large"
+          startIcon={<FaGithub size={22} />}
+        >
+          Login with GitHub
+        </Button>
       </div>
     </div>
   );

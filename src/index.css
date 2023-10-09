@@ -10,11 +10,14 @@
   .nav.active{
     background-color: #1565c0;
     color: #ffff;
-
   }
-  .nav{
+  .nav.active:hover{
+    background-color: #236abb;
+    color: #ffff;
+  }
+  /* .nav{
     color: darkorange;
-  }
+  } */
 
   .drawer-side a.active {
     color: #ffff;

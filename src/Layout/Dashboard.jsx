@@ -6,6 +6,7 @@ import {
   FaCheckCircle,
   FaSchool,
   FaBuilding,
+  FaBookmark,
 } from "react-icons/fa";
 import { LuSchool } from "react-icons/lu";
 import { AiFillFileAdd } from "react-icons/ai";
@@ -21,7 +22,6 @@ const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
   const { user } = useAuth();
-  console.log(user);
 
   const adminMenu = (
     <>
@@ -78,6 +78,12 @@ const Dashboard = () => {
           {" "}
           <LuSchool size={22} /> My Selected Classes
           <div className="badge">+{data?.length || 0}</div>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to={`/dashboard/myBookmark/${user?.email}`}>
+          {" "}
+          <FaBookmark size={22} /> My Bookmark
         </NavLink>
       </li>
       <li>

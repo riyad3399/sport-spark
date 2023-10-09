@@ -18,16 +18,16 @@ const MyClasses = () => {
       <div className="overflow-x-auto px-5">
         <table className="table">
           {/* head */}
-          <thead className="bg-base-300">
+          <thead className="bg-gray-300">
             <tr>
-              <th className="text-sm">#</th>
-              <th className="text-sm">Image</th>
-              <th className="text-sm">Name</th>
-              <th className="text-sm">Instructor</th>
-              <th className="text-sm">Price</th>
-              <th className="text-sm">payment</th>
-              <th className="text-sm">sslPay</th>
-              <th className="text-sm">Action</th>
+              <th>#</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Instructor</th>
+              <th>Price</th>
+              <th>payment</th>
+              <th>sslPay</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>

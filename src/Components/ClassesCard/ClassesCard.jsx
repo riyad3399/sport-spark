@@ -5,7 +5,7 @@ import useCart from "../../hooks/useCart";
 import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
+import BookmarkButton from "../shared/BookmarkButton";
 
 const ClassesCard = ({ data }) => {
   useEffect(() => {
@@ -81,8 +81,11 @@ const ClassesCard = ({ data }) => {
           <img
             src={pictureURL}
             alt="classes"
-            className="rounded-lg group-hover:scale-105 transition"
+            className="rounded-lg group-hover:scale-105 transition relative"
           />
+          <span className="absolute top-6 right-5">
+            <BookmarkButton data={data} />
+          </span>
         </figure>
         <div className="card-body ">
           <h2 className="card-title text-2xl">

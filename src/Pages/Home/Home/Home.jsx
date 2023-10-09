@@ -13,7 +13,7 @@ const Home = () => {
     AOS.init();
   }, []);
   return (
-    <div>
+    <div className="container mx-auto">
       <Helmet>
         <title>Home - Sport Spark</title>
       </Helmet>
@@ -26,7 +26,7 @@ const Home = () => {
         <div >
           <PopularInstructor></PopularInstructor>
         </div>
-        <div >
+        <div>
           <ExtraSection></ExtraSection>
         </div>
     </div>

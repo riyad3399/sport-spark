@@ -1,13 +1,12 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import regesterImg from "../../assets/register.jpg";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import SocialLogin from "../shared/SocialLogin/SocialLogin";
 import { TextField } from "@mui/material";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import SocialLogin from "../shared/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const { createUser, updateUserProfile, logOut } = useAuth();
@@ -18,7 +17,7 @@ const SignUp = () => {
   const handleLogout = () => {
     logOut()
       .then(() => {
-        console.log("log out")
+        console.log("log out");
       })
       .catch((error) => {
         console.log(error);
@@ -66,7 +65,6 @@ const SignUp = () => {
                   showConfirmButton: false,
                   timer: 1500,
                 });
-              
               }
             });
           Swal.fire({
@@ -78,8 +76,8 @@ const SignUp = () => {
             rgba(0,0,123,0.4)
           `,
           });
-          updateUserProfile(data.name, data.photo).then(() => { });
-          handleLogout()
+          updateUserProfile(data.name, data.photo).then(() => {});
+          handleLogout();
           navigate("/login");
         })
         .catch((error) => {
@@ -93,94 +91,116 @@ const SignUp = () => {
   };
 
   return (
-    <div className="my-8">
+    <div className="bg-[#e6f7ff] min-h-screen flex items-center justify-center">
       <Helmet>
         <title>SignUp - Sport Spark</title>
       </Helmet>
-      <h1 className="text-4xl text-center mb-5 font-semibold">Sign Up Now!</h1>
-      <div className="hero min-h-screen w-full">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center lg:text-left md:w-1/2 sm:w-full">
-            <img src={regesterImg} alt="" />
+      <div className="w-full">
+        <h1 className="text-4xl text-center mb-5 font-semibold">
+          Sign Up Now!
+        </h1>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="max-w-sm mx-auto space-y-4 "
+        >
+          <div>
+            <TextField
+              type="text"
+              label="Name"
+              className="w-full"
+              {...register("name", { required: true })}
+            />
+            {errors.name && (
+              <span className="text-red-600">Name is required</span>
+            )}
           </div>
-          <div className="card flex-shrink-0 md:w-1/2 sm:w-full max-w-sm shadow-2xl bg-base-100">
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="card-body space-y-2"
+          {/* Add other form fields similarly */}
+          <div className="relative">
+            <TextField
+              type={showPassword ? "text" : "password"}
+              label="Password"
+              className="w-full"
+              {...register("password", {
+                required: true,
+                minLength: 6,
+                maxLength: 20,
+                pattern: /(?=.*[A-Z])(?=.*[!@#$&*])/,
+              })}
+            />
+            {errors.password?.type === "required" && (
+              <p className="text-red-600">Password is required</p>
+            )}
+            {errors.password?.type === "minLength" && (
+              <p className="text-red-600">Password must be 6 characters</p>
+            )}
+            {errors.password?.type === "pattern" && (
+              <p className="text-red-600">
+                Password must have one Uppercase and one special character.
+              </p>
+            )}
+            <p
+              onClick={handleShowPassword}
+              className="absolute top-[18px] right-2 cursor-pointer"
             >
-              <div>
-                <TextField
-                  type="text"
-                  label="Name"
-                  className="w-full"
-                  {...register("name", { required: true })}
-                />
-                {errors.name && (
-                  <span className="text-red-600">Name is required</span>
-                )}
-              </div>
-              <div>
-                <TextField
-                  type="email"
-                  label="Email"
-                  className="w-full"
-                  {...register("email", { required: true })}
-                />
-                {errors.email && (
-                  <span className="text-red-600">Email is required</span>
-                )}
-              </div>
-              <div className="relative">
-                <TextField
-                  type={showPassword ? "text" : "password"}
-                  label="Password"
-                  className="w-full "
-                  {...register("password", {
-                    required: true,
-                    minLength: 6,
-                    maxLength: 20,
-                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])/,
-                  })}
-                />
-                {errors.password?.type === "required" && (
-                  <p className="text-red-600">Password is required</p>
-                )}
-                {errors.password?.type === "minLength" && (
-                  <p className="text-red-600">Password must be 6 characters</p>
-                )}
-                {errors.password?.type === "pattern" && (
-                  <p className="text-red-600">
-                    Password must have one Uppercase and one special character.
-                  </p>
-                )}
-                <p
-                  onClick={handleShowPassword}
-                  className="absolute top-[18px] right-2"
-                >
-                  {showPassword ? (
-                    <FaEye className="text-blue-500" size={20} />
-                  ) : (
-                    <FaEyeSlash size={20} />
-                  )}
-                </p>
-              </div>
-              <div>
-                <TextField
-                  type={showPassword ? "text" : "password"}
-                  label="Confirm Password"
-                  className="w-full"
-                  {...register("confirm", { required: true })}
-                />
-                {errors.confirm && (
-                  <span className="text-red-600">
-                    confirm password is required
-                  </span>
-                )}
-                {errorMessage && (
-                  <span className="text-red-600">{errorMessage}</span>
-                )}
-              </div>
-              <div>
+              {showPassword ? (
+                <FaEye className="text-blue-500" size={20} />
+              ) : (
+                <FaEyeSlash size={20} />
+              )}
+            </p>
+          </div>
+          <div>
+            <TextField
+              type={showPassword ? "text" : "password"}
+              label="Confirm Password"
+              className="w-full"
+              {...register("confirm", { required: true })}
+            />
+            {errors.confirm && (
+              <span className="text-red-600">Confirm password is required</span>
+            )}
+            {errorMessage && (
+              <span className="text-red-600">{errorMessage}</span>
+            )}
+          </div>
+          <div>
+            <TextField
+              type="url"
+              label="Photo URL"
+              className="w-full"
+              {...register("photo", { required: true })}
+            />
+            {errors.photoURL && (
+              <span className="text-red-600">PhotoURL is required</span>
+            )}
+          </div>
+          <div>
+            <input
+              type="submit"
+              value="Sign Up"
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+            />
+          </div>
+        </form>
+        <div className="text-center mt-4 max-w-sm mx-auto ">
+          <div className="my-2 divider">OR</div>
+          <SocialLogin />
+          <p className="mt-3">
+            Already have an account? Go{" "}
+            <NavLink to="/login" className="text-blue-500 font-semibold">
+              Login
+            </NavLink>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SignUp;
+
+/*
+ <div>
                 <TextField
                   type="url"
                   label="Photo URL"
@@ -191,27 +211,4 @@ const SignUp = () => {
                   <span className="text-red-600">PhotoURL is required</span>
                 )}
               </div>
-              <div className="form-control mt-6">
-                <input
-                  type="submit"
-                  value="signup"
-                  className="btn btn-primary"
-                />
-              </div>
-              <div className="divider">OR</div>
-              <SocialLogin></SocialLogin>
-              <p className="text-center mt-3">
-                you have an already Account? Go{" "}
-                <NavLink to="/login" className="text-blue-500 font-semibold">
-                  Login
-                </NavLink>
-              </p>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default SignUp;
+*/
