@@ -6,6 +6,7 @@ import ExtraSection from "../ExtraSection/ExtraSection";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import ScrollToTopButton from "../../../ScrollToTop/ScrollToTopButton";
 
 
 const Home = () => {
@@ -13,7 +14,7 @@ const Home = () => {
     AOS.init();
   }, []);
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto relative">
       <Helmet>
         <title>Home - Sport Spark</title>
       </Helmet>
@@ -28,7 +29,10 @@ const Home = () => {
         </div>
         <div>
           <ExtraSection></ExtraSection>
-        </div>
+      </div>
+      <div className="absolute top-10 right-6">
+        <ScrollToTopButton/>
+      </div>
     </div>
   );
 };

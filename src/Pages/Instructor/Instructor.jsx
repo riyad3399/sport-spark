@@ -5,9 +5,10 @@ import { Helmet } from "react-helmet-async";
 const Instructor = () => {
   const [instructorData, setInstructorData] = useState([]);
 
-
   useEffect(() => {
-    fetch("http://localhost:5000/usersdata/instructor")
+    fetch(
+      "https://sport-spark-server-riyad3399.vercel.app/usersdata/instructor"
+    )
       .then((res) => res.json())
       .then((data) => {
         setInstructorData(data);
@@ -27,7 +28,6 @@ const Instructor = () => {
         {datas?.map((data) => (
           <InstructorCard key={data._id} data={data}></InstructorCard>
         ))}
-
       </div>
     </div>
   );

@@ -7,13 +7,17 @@ import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 
 const ShowBookmarkItems = () => {
-    const {user} = useAuth()
+  const { user } = useAuth();
   const [bookmarkData, setBookmarkData] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/bookmark/${user?.email}`).then((data) => {
-        setBookmarkData(data.data)
-    });
+    axios
+      .get(
+        `https://sport-spark-server-riyad3399.vercel.app/bookmark/${user?.email}`
+      )
+      .then((data) => {
+        setBookmarkData(data.data);
+      });
   }, [user, bookmarkData]);
 
   return (

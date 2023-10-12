@@ -47,7 +47,6 @@ const Dashboard = () => {
     <>
       <li>
         <NavLink to="/dashboard/instructor">
-          {" "}
           <FaHome size={22} /> Instructor Home
         </NavLink>
       </li>
@@ -67,12 +66,7 @@ const Dashboard = () => {
 
   const studentMenu = (
     <>
-      <li>
-        <NavLink to="/dashboard/userhome">
-          {" "}
-          <FaHome size={22} /> User Home
-        </NavLink>
-      </li>
+     
       <li>
         <NavLink to="/dashboard/myclasses">
           {" "}

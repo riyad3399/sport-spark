@@ -10,7 +10,7 @@ const Classes = () => {
   const perPage = 6;
 
   useEffect(() => {
-    fetch("http://localhost:5000/classes")
+    fetch("https://sport-spark-server-riyad3399.vercel.app/classes")
       .then((res) => res.json())
       .then((data) => {
         setClassData(data);
@@ -59,11 +59,17 @@ const Classes = () => {
           onPageChange={handlePageChange}
           containerClassName={"pagination flex space-x-2"}
           activeClassName={"bg-blue-500 text-white rounded-full px-3 py-1"}
-          pageClassName={"rounded-full px-3 py-1 hover:bg-blue-200 cursor-pointer"}
+          pageClassName={
+            "rounded-full px-3 py-1 hover:bg-blue-200 cursor-pointer"
+          }
           previousLabel={"<Previous"}
           nextLabel={"Next>"}
-          previousClassName={"px-3 py-1 rounded-full hover:bg-blue-200 cursor-pointer border-2"}
-          nextClassName={"px-3 py-1 rounded-full hover:bg-blue-200 cursor-pointer border-2"}
+          previousClassName={
+            "px-3 py-1 rounded-full hover:bg-blue-200 cursor-pointer border-2"
+          }
+          nextClassName={
+            "px-3 py-1 rounded-full hover:bg-blue-200 cursor-pointer border-2"
+          }
           breakLabel={"..."}
           breakLinkClassName={"text-gray-600"} // Style the "Break" label text
         />

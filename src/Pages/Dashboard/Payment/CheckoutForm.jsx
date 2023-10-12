@@ -5,6 +5,7 @@ import useAuth from "../../../hooks/useAuth";
 import "./checkoutForm.css";
 import useAxiosSecure from "../../../hooks/axiosSecure";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ item }) => {
   const stripe = useStripe();
@@ -15,6 +16,8 @@ const CheckoutForm = ({ item }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState();
+    const navigate = useNavigate();
+
 
   // TODO: top classes enrolled updated
   useEffect(() => {
@@ -29,20 +32,23 @@ const CheckoutForm = ({ item }) => {
 
   useEffect(() => {
     if (transactionId) {
-      fetch(`https://sport-spark-server-riyad3399.vercel.app/payments/${item.selectClassId}`, {
-        method: "PATCH",
-      })
+      fetch(
+        `https://sport-spark-server-riyad3399.vercel.app/payments/${item.selectClassId}`,
+        {
+          method: "PATCH",
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log("from enrolled", data);
           if (data.modifiedCount) {
             Swal.fire({
-              position: 'top-end',
-              icon: 'success',
+              icon: "success",
               title: "payment successful",
               showConfirmButton: false,
-              timer: 1500
-            })
+              timer: 1500,
+            });
+            navigate(`/dashboard/payhistory`);
           }
         });
     }

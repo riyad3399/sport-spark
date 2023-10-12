@@ -31,6 +31,15 @@
    
   }
 
+
+  /* scroll to top section */
+  .scrollTop{
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    
+  }
+
  
   
 

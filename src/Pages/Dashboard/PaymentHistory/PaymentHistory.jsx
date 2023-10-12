@@ -4,17 +4,19 @@ import { Helmet } from "react-helmet-async";
 import { FaTrash } from "react-icons/fa";
 import RoutesTitel from "../../../Components/RoutesTitle/RoutesTitle";
 import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
 
 const PaymentHistory = () => {
   const [axiosSecure] = useAxiosSecure();
   const [paidClasses, setPaidClasses] = useState([]);
+  const { user } = useAuth()
 
   useEffect(() => {
-    axiosSecure.get("/payments").then((res) => {
+    axiosSecure.get(`/payments/${user?.email}`).then((res) => {
       console.log("from payment history", res.data);
       setPaidClasses(res.data);
     });
-  }, [axiosSecure]);
+  }, [axiosSecure, paidClasses, user?.email]);
 
   const handleDeletedHistory = () => {
     fetch(`https://sport-spark-server-riyad3399.vercel.app/payments`, {
@@ -25,7 +27,6 @@ const PaymentHistory = () => {
         console.log(data);
         if (data.deletedCount > 0) {
           Swal.fire({
-            position: "top-end",
             icon: "success",
             title: "Your History Clear all successful",
             showConfirmButton: false,
@@ -44,12 +45,12 @@ const PaymentHistory = () => {
         subHeading={"Your Payment history"}
         heading={"Payment history"}
       ></RoutesTitel>
-      <div className="flex justify-between items-center px-5">
+      <div className="flex justify-between items-center ">
         <h3 className="text-2xl font-semibold my-5 px-5">
           Total Payments: {paidClasses.length}
         </h3>
-        <button onClick={handleDeletedHistory} className="btn ">
-          <FaTrash size={22} /> Clear All
+        <button onClick={handleDeletedHistory} className="btn btn-sm mr-5">
+          <FaTrash size={20} /> Clear All
         </button>
       </div>
       <div className="overflow-x-auto px-5">

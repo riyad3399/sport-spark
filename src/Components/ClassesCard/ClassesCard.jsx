@@ -6,12 +6,16 @@ import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import BookmarkButton from "../shared/BookmarkButton";
+import axios from "axios";
 
 const ClassesCard = ({ data }) => {
   useEffect(() => {
     AOS.init();
   }, []);
   const [buttonDisabled, setButtonDisabled] = useState(false);
+    const [bookmarkUser, setBookmarkUser] = useState([]);
+
+
   const {
     name,
     pictureURL,
@@ -26,6 +30,8 @@ const ClassesCard = ({ data }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [, , refetch] = useCart();
+
+   
 
   const handleSelectClass = (item) => {
     setButtonDisabled(true);
@@ -73,6 +79,12 @@ const ClassesCard = ({ data }) => {
       });
     }
   };
+
+   useEffect(() => {
+     axios.get(`http://localhost:5000/users/${user?.email}`).then((data) => {
+       setBookmarkUser(data.data);
+     });
+   }, [user]);
 
   return (
     <div>

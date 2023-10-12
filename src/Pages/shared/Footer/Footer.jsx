@@ -1,9 +1,12 @@
 import logo from "../../../assets/logo.png";
 
 const Footer = () => {
+
+
+  
   return (
-    <div className="min-w-full">
-      <footer className="footer p-10 bg-base-200 text-base-content">
+    <div className="min-w-full ">
+      <footer className="footer p-10 bg-base-200 text-base-content relative">
         <div>
           <span className="footer-title">Services</span>
           <a className="NavLink NavLink-hover">Branding</a>
@@ -24,6 +27,7 @@ const Footer = () => {
           <a className="NavLink NavLink-hover">Privacy policy</a>
           <a className="NavLink NavLink-hover">Cookie policy</a>
         </div>
+       
       </footer>
       <footer className="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
         <img
@@ -31,7 +35,6 @@ const Footer = () => {
           alt="logo"
           className="w-[190px] h-[70px] object-cover"
         />{" "}
-        
         <p className="md:mt-8 ">Providing reliable tech since 1992</p>
         <div className="md:place-self-center md:justify-self-end">
           <div className="grid grid-flow-col gap-4">

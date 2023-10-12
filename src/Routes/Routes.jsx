@@ -21,6 +21,7 @@ import SslPayment from "../Pages/Dashboard/sslPayment/SslPayment";
 import PaymentSuccess from "../Pages/Dashboard/PaymentSuccess/PaymentSuccess";
 import LoginWithAnimation from "../LoginWithAnimation/LoginWithAnimation";
 import MyBookmark from "../Pages/Dashboard/MyBookmark/MyBookmark";
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 
 const route = createBrowserRouter([
   {
@@ -74,7 +75,10 @@ const route = createBrowserRouter([
       {
         path: "myBookmark/:email",
         element: <MyBookmark />,
-        loader: ({ params }) => fetch(`http://localhost:5000/bookmark/${params.email}`),
+        loader: ({ params }) =>
+          fetch(
+            `https://sport-spark-server-riyad3399.vercel.app/bookmark/${params.email}`
+          ),
       },
       {
         path: "myenrolled",
@@ -105,6 +109,10 @@ const route = createBrowserRouter([
             <AllUsers></AllUsers>
           </AdminRoute>
         ),
+      },
+      {
+        path: "adminhome",
+        element: <AdminHome></AdminHome>,
       },
       {
         path: "manageclass",

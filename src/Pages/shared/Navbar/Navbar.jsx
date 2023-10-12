@@ -16,17 +16,18 @@ import logo from "../../../assets/logo.png";
 import Swal from "sweetalert2";
 import { ExitToApp } from "@mui/icons-material";
 import ShowBookmarkItems from "../../../Components/shared/ShowBookmarkItems";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [bookmarkUser, setBookmarkUser] = useState([]);
+
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
-
-
- 
 
   const menuItems = (
     <List>
@@ -73,21 +74,23 @@ const Navbar = () => {
       });
   };
 
+  useEffect(() => {
+    axios.get(`http://localhost:5000/users/${user?.email}`).then((data) => {
+      setBookmarkUser(data.data);
+    });
+  }, [user]);
+
+
+
+
+
   return (
     <>
       {/* Mobile Navbar */}
-      <AppBar
-        position="fixed"
-        sx={{ display: { xs: "block", sm: "none" } }}
-      >
+      <AppBar position="fixed" sx={{ display: { xs: "block", sm: "none" } }}>
         <Toolbar className="flex justify-between items-center">
           <div className="flex justify-center">
-            <IconButton
-              edge="start"
-              
-              aria-label="menu"
-              onClick={toggleDrawer}
-            >
+            <IconButton edge="start" aria-label="menu" onClick={toggleDrawer}>
               <MenuIcon />
             </IconButton>
             <Link to="/">
@@ -100,7 +103,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex items-center gap-3">
-            <ShowBookmarkItems />
+            {user && bookmarkUser.role === "user" && <ShowBookmarkItems />}
             <ToggleThem />
           </div>
         </Toolbar>
@@ -108,8 +111,8 @@ const Navbar = () => {
       {/* Tablet and Desktop Navbar */}
       <AppBar
         position="fixed"
-        className="md:py-1 "
-        style={{backgroundColor: "transparent"}}
+        className="md:py-1 top-section"
+        style={{ backgroundColor: "transparent" }}
         sx={{ display: { xs: "none", sm: "block" } }}
       >
         <Toolbar className="flex justify-between items-center">
@@ -130,7 +133,6 @@ const Navbar = () => {
               Home
             </Button>
             <Button
-              
               component={NavLink}
               to="/classes"
               className="text-[16px] font-bold text-black nav"
@@ -138,7 +140,6 @@ const Navbar = () => {
               Classes
             </Button>
             <Button
-              
               component={NavLink}
               to="/instructor"
               className="text-[16px] font-bold text-black nav"
@@ -147,7 +148,6 @@ const Navbar = () => {
             </Button>
             {user && (
               <Button
-                
                 component={NavLink}
                 to="/dashboard"
                 className="text-[16px] font-bold text-black nav"
@@ -159,7 +159,7 @@ const Navbar = () => {
 
           {user ? (
             <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-              <ShowBookmarkItems />
+              {user && bookmarkUser.role === "user" && <ShowBookmarkItems />}
               <img
                 className="h-[50px] w-[50px] border-2 rounded-full hidden sm:hidden md:block"
                 src={user && user.photoURL}

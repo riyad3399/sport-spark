@@ -60,24 +60,25 @@ const ManageClasses = () => {
         heading={"Manage Class"}
       ></RoutesTitel>
       <div className="overflow-x-auto px-5 mt-4">
-        <table className="table">
-          <thead>
+        <h3 className="mt-8 mb-4 md:text-2xl font-semibold">Total All Classes: { displayedClasses.length}</h3>
+        <table className="table ">
+          <thead className="bg-gray-300 text-center">
             <tr>
-              <th>#</th>
-              <th>Instructor email</th>
-              <th>Instructor Name</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th className="text-base">#</th>
+              <th className="text-base">Instructor email</th>
+              <th className="text-base">Instructor Name</th>
+              <th className="text-base">Status</th>
+              <th className="text-base">Action</th>
             </tr>
           </thead>
           <tbody>
             {displayedClasses.map((mClass, index) => (
-              <tr key={mClass._id}>
-                <td>{startIndex + index + 1}</td>
-                <td>{mClass.instructorEmail}</td>
-                <td>{mClass.instructorName}</td>
-                <td>{mClass.status}</td>
-                <td>
+              <tr key={mClass._id} className="text-center border">
+                <td className="border-b">{startIndex + index + 1}</td>
+                <td className="border-b">{mClass.instructorEmail}</td>
+                <td className="border-b">{mClass.instructorName}</td>
+                <td className="border-b">{mClass.status}</td>
+                <td className="border-b">
                   {mClass.status === "accept" ? (
                     <button
                       onClick={() => handleStatus(mClass)}

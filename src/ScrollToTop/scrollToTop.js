@@ -1,3 +1,13 @@
+// const scrollToTopElement = document.createElement("div");
+// scrollToTopElement.classList.add("scrollTop");
+
+// scrollToTopElement.innerHTML = `<button>click</button>
+// `;
+
+// const footerElement = document.querySelector(".footer-section");
+
+// footerElement.after(scrollToTopElement);
+
 import { Helmet } from "react-helmet-async";
 import { FaChalkboardTeacher, FaTrash } from "react-icons/fa";
 import { RiAdminLine } from "react-icons/ri";
@@ -59,28 +69,29 @@ const AllUsers = () => {
     });
   };
 
-  const handleMakeAdmin = (user) => {
-    fetch(
-      `https://sport-spark-server-riyad3399.vercel.app/users/admin/${user._id}`,
-      {
-        method: "PATCH",
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.modifiedCount) {
-          refetch();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `${user.name} is an Admin Now`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      });
-  };
+
+   const handleMakeAdmin = (user) => {
+     fetch(
+       `https://sport-spark-server-riyad3399.vercel.app/users/admin/${user._id}`,
+       {
+         method: "PATCH",
+       }
+     )
+       .then((res) => res.json())
+       .then((data) => {
+         console.log(data);
+         if (data.modifiedCount) {
+           refetch();
+           Swal.fire({
+             position: "top-end",
+             icon: "success",
+             title: `${user.name} is an Admin Now`,
+             showConfirmButton: false,
+             timer: 1500,
+           });
+         }
+       });
+   };
 
   const handleMakeInstructor = (user) => {
     fetch(
@@ -114,7 +125,7 @@ const AllUsers = () => {
         subHeading={"Show All Users"}
         heading={"All Users"}
       ></RoutesTitel>
-      <h3 className="md:text-2xl font-semibold mt-8 mb-4">
+      <h3 className="text-2xl font-semibold mt-8 mb-4">
         Total Users: {users.length}
       </h3>
       <div className="overflow-x-auto">
@@ -185,31 +196,20 @@ const AllUsers = () => {
           </tbody>
         </table>
       </div>
-      <div className="flex justify-end my-6 mr-4">
-        <ReactPaginate
-          pageCount={pageCount}
-          pageRangeDisplayed={5}
-          marginPagesDisplayed={2}
-          onPageChange={handlePageChange}
-          containerClassName={"pagination flex space-x-2"}
-          activeClassName={"active bg-blue-500 text-white"}
-          pageClassName={
-            "rounded-full px-3 py-1 hover:bg-blue-200 cursor-pointer"
-          }
-          previousLabel={"<Previous"}
-          nextLabel={"Next>"}
-          previousClassName={
-            "px-3 py-1 rounded-full hover:bg-blue-200 cursor-pointer border-2"
-          }
-          nextClassName={
-            "px-3 py-1 rounded-full hover:bg-blue-200 cursor-pointer border-2"
-          }
-          breakLabel={"..."}
-          breakLinkClassName={"text-gray-600"} // Style the "Break" label text
-        />
-      </div>
+      <ReactPaginate
+        previousLabel={"Previous"}
+        nextLabel={"Next"}
+        pageCount={pageCount}
+        onPageChange={handlePageChange}
+        containerClassName={"pagination"}
+        previousLinkClassName={"pagination__link"}
+        nextLinkClassName={"pagination__link"}
+        disabledClassName={"pagination__link--disabled"}
+        activeClassName={"pagination__link--active"}
+      />
     </div>
   );
 };
 
 export default AllUsers;
+
