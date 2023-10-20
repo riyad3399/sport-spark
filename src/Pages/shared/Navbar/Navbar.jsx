@@ -24,7 +24,6 @@ const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [bookmarkUser, setBookmarkUser] = useState([]);
 
-
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
@@ -80,14 +79,14 @@ const Navbar = () => {
     });
   }, [user]);
 
-
-
-
-
   return (
     <>
       {/* Mobile Navbar */}
-      <AppBar position="fixed" sx={{ display: { xs: "block", sm: "none" } }}>
+      <AppBar
+        position="fixed"
+        sx={{ display: { xs: "block", sm: "none" } }}
+        style={{ backgroundColor: "transparent" }}
+      >
         <Toolbar className="flex justify-between items-center">
           <div className="flex justify-center">
             <IconButton edge="start" aria-label="menu" onClick={toggleDrawer}>
@@ -192,6 +191,25 @@ const Navbar = () => {
         sx={{ display: { xs: "block", sm: "none" } }}
       >
         {menuItems}
+        <div className="text-center">
+          {user ? (
+            <Button
+              variant="contained"
+              color="secondary"
+              startIcon={<ExitToApp />}
+              onClick={handleLogout}
+              style={{ margin: "16px" }}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Link to="/login">
+              <Button variant="contained" color="primary">
+                Login
+              </Button>
+            </Link>
+          )}
+        </div>
       </Drawer>
     </>
   );

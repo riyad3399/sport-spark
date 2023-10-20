@@ -6,7 +6,7 @@ import ExtraSection from "../ExtraSection/ExtraSection";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import ScrollToTopButton from "../../../ScrollToTop/ScrollToTopButton";
+// import ScrollToTopButton from "../../../ScrollToTop/ScrollToTopButton";
 
 
 const Home = () => {
@@ -30,9 +30,7 @@ const Home = () => {
         <div>
           <ExtraSection></ExtraSection>
       </div>
-      <div className="absolute top-10 right-6">
-        <ScrollToTopButton/>
-      </div>
+     
     </div>
   );
 };
